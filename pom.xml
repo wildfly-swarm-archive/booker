@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://maven.apache.org/POM/4.0.0"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <groupId>org.wildfly.swarm.booker</groupId>
+  <artifactId>booker-parent</artifactId>
+  <version>1.0.0.Alpha01-SNAPSHOT</version>
+
+  <name>Reader: Parent</name>
+  <description>Reader: Parent</description>
+
+  <packaging>pom</packaging>
+
+  <properties>
+    <version.wildfly-swarm>1.0.0.Alpha4-SNAPSHOT</version.wildfly-swarm>
+
+    <maven.min.version>3.2.1</maven.min.version>
+
+    <maven.compiler.target>1.8</maven.compiler.target>
+    <maven.compiler.source>1.8</maven.compiler.source>
+
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+  </properties>
+
+  <build>
+    <finalName>${project.artifactId}</finalName>
+
+    <pluginManagement>
+      <plugins>
+        <plugin>
+          <groupId>org.wildfly.swarm</groupId>
+          <artifactId>wildfly-swarm-plugin</artifactId>
+          <version>${version.wildfly-swarm}</version>
+          <executions>
+            <execution>
+              <goals>
+                <goal>package</goal>
+              </goals>
+            </execution>
+          </executions>
+        </plugin>
+      </plugins>
+    </pluginManagement>
+  </build>
+
+  <dependencyManagement>
+    <dependencies>
+      <dependency>
+        <groupId>org.wildfly.swarm</groupId>
+        <artifactId>wildfly-swarm-jaxrs</artifactId>
+        <version>${version.wildfly-swarm}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.wildfly.swarm</groupId>
+        <artifactId>wildfly-swarm-undertow</artifactId>
+        <version>${version.wildfly-swarm}</version>
+      </dependency>
+    </dependencies>
+  </dependencyManagement>
+
+  <modules>
+    <module>accounts</module>
+    <module>books</module>
+    <module>pricing</module>
+    <module>recommendations</module>
+
+    <module>web-client</module>
+  </modules>
+
+</project>

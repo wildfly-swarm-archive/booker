@@ -1,0 +1,12 @@
+.idea
+*.iml
+target/
+build/
+.gradle/
+log
+tmp
+
+# eclipse stuff
+.classpath
+.project
+.settings/
