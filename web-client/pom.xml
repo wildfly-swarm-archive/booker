@@ -20,16 +20,19 @@
   <name>Booker: Web Client</name>
   <description>Booker: Web Client</description>
 
-  <packaging>jar</packaging>
+  <packaging>war</packaging>
 
   <build>
     <plugins>
       <plugin>
+        <artifactId>maven-war-plugin</artifactId>
+        <configuration>
+          <failOnMissingWebXml>false</failOnMissingWebXml>
+        </configuration>
+      </plugin>
+      <plugin>
         <groupId>org.wildfly.swarm</groupId>
         <artifactId>wildfly-swarm-plugin</artifactId>
-        <configuration>
-          <mainClass>org.wildfly.swarm.booker.webclient.Main</mainClass>
-        </configuration>
         <executions>
           <execution>
             <goals>

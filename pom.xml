@@ -32,6 +32,9 @@
           <groupId>org.wildfly.swarm</groupId>
           <artifactId>wildfly-swarm-plugin</artifactId>
           <version>${version.wildfly-swarm}</version>
+          <configuration>
+            <jboss.bind.address>127.0.0.1</jboss.bind.address>
+          </configuration>
           <executions>
             <execution>
               <goals>
@@ -54,6 +57,11 @@
       <dependency>
         <groupId>org.wildfly.swarm</groupId>
         <artifactId>wildfly-swarm-undertow</artifactId>
+        <version>${version.wildfly-swarm}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.wildfly.swarm</groupId>
+        <artifactId>wildfly-swarm-keycloak</artifactId>
         <version>${version.wildfly-swarm}</version>
       </dependency>
     </dependencies>
