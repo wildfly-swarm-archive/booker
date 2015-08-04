@@ -6,19 +6,31 @@ Booker.State = {};
 Booker.Actions = {};
 
 var keycloak= new Keycloak('http://localhost:8080/keycloak.json');
-//keycloak.init();
 
 Booker.App = React.createClass({
+
   render: function() {
     return (
       <div>
-        <div>App</div>
         <Booker.Header/>
-        <RouteHandler/>
+        <div className="row">
+          <RouteHandler/>
+        </div>
       </div>
     );
   }
 });
+
+Booker.CheckAuth = React.createClass({
+  render: function() {
+    if ( ! keycloak.authenticated ) {
+      keycloak.login();
+    }
+    return (
+      <RouteHandler/>
+    );
+  }
+})
 
 Booker.Home = React.createClass({
   render: function() {
@@ -36,30 +48,6 @@ Booker.About = React.createClass({
   }
 });
 
-Booker.Books = React.createClass({
-  render: function() {
-    return (
-      <div>Your Books</div>
-    );
-  }
-});
-
-Booker.Book = React.createClass({
-  render: function() {
-    var id = this.props.params.id;
-    return (
-      <div>Book {id}</div>
-    );
-  }
-});
-
-Booker.Account = React.createClass({
-  render: function() {
-    return (
-      <div>Your Account</div>
-    );
-  }
-});
 
 Booker.NotFound = React.createClass({
   render: function() {

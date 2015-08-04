@@ -22,6 +22,10 @@
 
   <packaging>war</packaging>
 
+  <properties>
+    <version.foundation>5.5.2</version.foundation>
+  </properties>
+
   <build>
     <plugins>
       <plugin>
@@ -48,6 +52,11 @@
     <dependency>
       <groupId>org.wildfly.swarm</groupId>
       <artifactId>wildfly-swarm-undertow</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.webjars</groupId>
+      <artifactId>foundation</artifactId>
+      <version>${version.foundation}</version>
     </dependency>
   </dependencies>
 

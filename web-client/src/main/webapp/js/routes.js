@@ -14,7 +14,13 @@ var NotFoundRoute = Router.Route;
         <Route name="book" path=":id" handler={Booker.Book}/>
         <DefaultRoute handler={Booker.Books}/>
       </Route>
-      <Route name="account" handler={Booker.Account} />
+      <Route name="store">
+        <Route name="store-item" path=":id" handler={Booker.StoreItem}/>
+        <DefaultRoute handler={Booker.Store}/>
+      </Route>
+      <Route path="account" handler={Booker.CheckAuth}>
+        <DefaultRoute name="account" handler={Booker.Account} />
+      </Route>
     </Route>
   );
 

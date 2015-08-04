@@ -15,10 +15,30 @@ Booker.State.UserInfo = Reflux.createStore({
 Booker.Header = React.createClass({
   render: function() {
     return (
-      <div id="header">
-        <span>Booker!</span>
-        <Booker.AuthHeader/>
+      <div id="header" className="row">
+        <div className="large-3 columns">
+          <span>Booker!</span>
+        </div>
+        <div className="large-6 columns">
+          <Booker.MenuHeader/>
+        </div>
+        <div className="large-3 columns">
+          <Booker.AuthHeader/>
+        </div>
       </div>
+    );
+  }
+});
+
+Booker.MenuHeader = React.createClass({
+  render: function() {
+    return (
+      <ul className="inline-list">
+        <li><Link to="about">About</Link></li>
+        <li><Link to="account">Account</Link></li>
+        <li><Link to="books">Your Books</Link></li>
+        <li><Link to="store">The Store</Link></li>
+      </ul>
     );
   }
 });
@@ -50,16 +70,12 @@ Booker.Unauthenticated = React.createClass({
 });
 
 Booker.Authenticated = React.createClass({
-  onClick: function() {
-    keycloak.logout();
-    return false;
-  },
   render: function() {
     return (
-      <span>
-        <Booker.UserInfo/>
-        <a id="" href={keycloak.createLogoutUrl()}>Logout</a>
-      </span>
+      <ul className="inline-list">
+        <li><Booker.UserInfo/></li>
+        <li><a href={keycloak.createLogoutUrl({redirectUri: 'http://localhost:8080/'})}>Logout</a></li>
+      </ul>
     )
   }
 });
@@ -76,7 +92,9 @@ Booker.UserInfo = React.createClass({
 
   render: function()  {
     return (
-      <span>{this.state.info.name}</span>
+      <span>
+        <span>{this.state.info.name}</span>
+      </span>
     )
   }
 
