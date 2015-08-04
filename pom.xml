@@ -33,7 +33,10 @@
           <artifactId>wildfly-swarm-plugin</artifactId>
           <version>${version.wildfly-swarm}</version>
           <configuration>
-            <jboss.bind.address>127.0.0.1</jboss.bind.address>
+            <properties>
+              <jboss.bind.address>127.0.0.1</jboss.bind.address>
+              <java.net.preferIPv4Stack>true</java.net.preferIPv4Stack>
+            </properties>
           </configuration>
           <executions>
             <execution>
@@ -64,12 +67,25 @@
         <artifactId>wildfly-swarm-keycloak</artifactId>
         <version>${version.wildfly-swarm}</version>
       </dependency>
+      <dependency>
+        <groupId>org.wildfly.swarm</groupId>
+        <artifactId>wildfly-swarm-ribbon-secured</artifactId>
+        <version>${version.wildfly-swarm}</version>
+      </dependency>
     </dependencies>
   </dependencyManagement>
+
+  <dependencies>
+    <dependency>
+      <groupId>org.wildfly.swarm</groupId>
+      <artifactId>wildfly-swarm-ribbon-secured</artifactId>
+    </dependency>
+  </dependencies>
 
   <modules>
     <module>accounts</module>
     <module>books</module>
+    <module>store</module>
     <module>pricing</module>
     <module>recommendations</module>
 
