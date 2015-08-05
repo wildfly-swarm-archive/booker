@@ -14,17 +14,23 @@ Booker.State.Topology = Reflux.createStore({
     this.trigger(this.topology);
   },
 
+  services: function() {
+    return Object.getOwnPropertyNames( this.topology ).sort( function(l,r) {
+      return l.localeCompare(r);
+    });
+  },
+
   servers: function(serviceName) {
     return this.topology[serviceName] || [];
   }
-});
 
+});
 
 Booker.Topology = React.createClass({
   mixins: [Reflux.connect(Booker.State.Topology,"topology")],
 
   render: function() {
-    var services = [ 'books', 'store' ];
+    var services = Booker.State.Topology.services();
     return (
       <div>
         <h1>Topology</h1>
@@ -61,3 +67,20 @@ Booker.TopologyService = React.createClass({
 });
 
 
+Ribbon = {};
+
+Ribbon.ajax = function(serviceName, url, data) {
+  var allServers = Booker.State.Topology.servers( serviceName );
+
+  if ( allServers.length > 0 ) {
+    return $.ajax({
+           dataType: "json",
+           url: "http://" + allServers[0] + url,
+           data: data,
+         });
+  }
+
+  var deferred = $.Deferred();
+  return deferred.reject();
+
+}

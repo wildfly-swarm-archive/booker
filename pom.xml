@@ -72,6 +72,11 @@
         <artifactId>wildfly-swarm-ribbon-secured</artifactId>
         <version>${version.wildfly-swarm}</version>
       </dependency>
+      <dependency>
+        <groupId>org.wildfly.swarm</groupId>
+        <artifactId>wildfly-swarm-weld-jaxrs</artifactId>
+        <version>${version.wildfly-swarm}</version>
+      </dependency>
     </dependencies>
   </dependencyManagement>
 
