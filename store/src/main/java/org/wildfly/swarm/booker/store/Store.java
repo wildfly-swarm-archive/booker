@@ -173,7 +173,8 @@ public class Store {
             if ( each.getKey().contains(q) ) {
                 chunk = new ArrayList<>(each.getValue());
                 chunk.removeAll( seen );
-                results.addAll( chunk );
+                results.addAll(chunk);
+                seen.addAll( chunk );
             }
         }
 
@@ -181,7 +182,8 @@ public class Store {
             if ( each.getKey().contains(q) ) {
                 chunk = new ArrayList<>(each.getValue());
                 chunk.removeAll(seen);
-                results.addAll( chunk );
+                results.addAll(chunk);
+                seen.addAll( chunk );
             }
         }
 
@@ -198,6 +200,10 @@ public class Store {
             returnedResults = results.subList( start, results.size() );
         } else {
             returnedResults = results.subList(start, end);
+        }
+
+        if ( returnedResults.isEmpty() ) {
+            return SearchResult.EMPTY;
         }
 
         return new SearchResult(returnedResults, page + 1, numPages );

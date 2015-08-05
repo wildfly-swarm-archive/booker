@@ -20,6 +20,7 @@ Booker.State.StoreSearchResults = Reflux.createStore({
   },
 
   output: function(results) {
+    console.log( results );
     this.trigger(results);
   }
 });

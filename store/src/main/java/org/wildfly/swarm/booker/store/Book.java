@@ -31,4 +31,8 @@ public class Book {
     public String getAuthor() {
         return this.author;
     }
+
+    public String toString() {
+        return "[" + this.id + ": " + this.title + "]";
+    }
 }
