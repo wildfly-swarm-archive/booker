@@ -88,7 +88,7 @@ Booker.SearchResults = React.createClass({
         {
           this.state.results.results.map( function(e) {
             return (
-              <li key={e.id}>{e.title}</li>
+              <li key={e.id}><Link to='store-item' params={{id: e.id}}>{e.title}</Link></li>
             );
           })
         }
@@ -100,10 +100,29 @@ Booker.SearchResults = React.createClass({
 })
 
 Booker.StoreItem = React.createClass({
+  mixins: [Router.State],
+
+  componentWillMount: function() {
+    console.log( "about to mount: " + this.getParams().id);
+
+    var self = this;
+
+    Ribbon.ajax( "store", "/book", { id: this.getParams().id } )
+      .then( function(data) {
+        console.log( "got state: ", data );
+        self.setState( data )
+      })
+  },
+
   render: function() {
+    if ( ! this.state ) {
+      return ( <div/> );
+    }
     return (
       <div className="large-12 column">
-        Store Item {this.props.params.id}
+        <div className="book-title">{this.state.title}</div>
+        <div className="book-author">{this.state.author}</div>
+        <div className="price">Price ${this.state.price}</div>
       </div>
     );
   }

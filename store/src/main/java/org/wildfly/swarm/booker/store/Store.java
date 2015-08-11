@@ -131,6 +131,10 @@ public class Store {
 
     }
 
+    public Book get(String id) {
+        return this.booksById.get(id);
+    }
+
     public static class SearchResult {
         public static SearchResult EMPTY = new SearchResult( Collections.emptyList(), 0, 0 );
 

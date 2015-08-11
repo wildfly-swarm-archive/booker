@@ -1,21 +1,29 @@
 package org.wildfly.swarm.booker.store;
 
 import java.io.IOException;
+import java.net.URL;
 import java.nio.file.FileVisitResult;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.SimpleFileVisitor;
 import java.nio.file.attribute.BasicFileAttributes;
+import java.util.Enumeration;
+import java.util.Iterator;
 import java.util.concurrent.atomic.AtomicInteger;
 
 import javax.xml.stream.XMLStreamException;
 
+import org.jboss.modules.Module;
+import org.jboss.modules.ModuleClassLoader;
+import org.jboss.modules.ModuleIdentifier;
+import org.jboss.modules.Resource;
 import org.jboss.shrinkwrap.api.ShrinkWrap;
-import org.jboss.shrinkwrap.api.asset.Asset;
 import org.jboss.shrinkwrap.api.asset.EmptyAsset;
+import org.jboss.shrinkwrap.impl.base.ServiceExtensionLoader;
 import org.wildfly.swarm.container.Container;
 import org.wildfly.swarm.jaxrs.JAXRSArchive;
+import org.wildfly.swarm.keycloak.Secured;
 import org.wildfly.swarm.netflix.ribbon.RibbonArchive;
 
 /**
@@ -52,11 +60,16 @@ public class Main {
             System.exit(0);
         }
 
+
+
         Container container = new Container();
+
         JAXRSArchive deployment = ShrinkWrap.create(JAXRSArchive.class);
         deployment.addPackage(Main.class.getPackage());
         deployment.addAsManifestResource(EmptyAsset.INSTANCE, "beans.xml");
         deployment.as(RibbonArchive.class).setApplicationName("store");
+        deployment.as(Secured.class);
+
         container.start();
         container.deploy(deployment);
 

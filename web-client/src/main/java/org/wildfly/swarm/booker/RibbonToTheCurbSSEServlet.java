@@ -22,6 +22,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.wildfly.swarm.netflix.ribbon.RibbonTopology;
 import org.wildfly.swarm.netflix.ribbon.RibbonTopologyListener;
 
+
 /**
  * @author Bob McWhirter
  */
@@ -32,6 +33,7 @@ public class RibbonToTheCurbSSEServlet extends HttpServlet {
 
     @Override
     public void init(ServletConfig config) throws ServletException {
+
         super.init(config);
 
         try {

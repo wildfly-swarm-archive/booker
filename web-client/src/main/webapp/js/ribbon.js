@@ -72,10 +72,19 @@ Ribbon = {};
 Ribbon.ajax = function(serviceName, url, data) {
   var allServers = Booker.State.Topology.servers( serviceName );
 
+  var headers = {};
+
+  if ( keycloak.token ) {
+    headers = {
+      'Authorization': 'Bearer ' + keycloak.token,
+    }
+  }
+
   if ( allServers.length > 0 ) {
     return $.ajax({
            dataType: "json",
            url: "http://" + allServers[0] + url,
+           headers: headers,
            data: data,
          });
   }

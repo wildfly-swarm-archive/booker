@@ -13,6 +13,8 @@ public class Book {
 
     private final String url;
 
+    private int price;
+
     public Book(String id, String title, String author, String url) {
         this.id = id;
         this.title = title;
@@ -30,6 +32,14 @@ public class Book {
 
     public String getAuthor() {
         return this.author;
+    }
+
+    public void setPrice(int price) {
+        this.price = price;
+    }
+
+    public int getPrice() {
+        return this.price;
     }
 
     public String toString() {
