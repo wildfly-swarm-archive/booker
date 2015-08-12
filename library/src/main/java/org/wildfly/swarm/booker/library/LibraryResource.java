@@ -55,7 +55,7 @@ public class LibraryResource {
         KeycloakPrincipal principal = (KeycloakPrincipal) context.getUserPrincipal();
         String userId = principal.getName();
         List<LibraryItem> list = new ArrayList<>();
-        TypedQuery<LibraryItem> q = this.em.createQuery("SELECT * FROM LIBRARY_ITEMS li WHERE li.userId = :userId", LibraryItem.class);
+        TypedQuery<LibraryItem> q = this.em.createQuery("SELECT li FROM LibraryItem li WHERE li.userId = :userId", LibraryItem.class);
         return q.setParameter( "userId", userId ).getResultList();
     }
 }

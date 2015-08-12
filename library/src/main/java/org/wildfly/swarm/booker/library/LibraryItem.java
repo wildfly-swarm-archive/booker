@@ -1,5 +1,6 @@
 package org.wildfly.swarm.booker.library;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -10,16 +11,18 @@ import javax.persistence.Table;
  * @author Bob McWhirter
  */
 @Entity
-@Table(name="LIBRARY_ITEM")
+@Table(name="LibraryItem")
 public class LibraryItem {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
 
+    @Column
     private String userId;
-    private String bookId;
 
+    @Column
+    private String bookId;
 
     public LibraryItem() {
 
