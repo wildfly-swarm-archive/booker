@@ -36,7 +36,7 @@ public class Main {
         JAXRSArchive deployment = ShrinkWrap.create(JAXRSArchive.class);
         deployment.addPackage(Main.class.getPackage());
         deployment.as(RibbonArchive.class).setApplicationName("library");
-        deployment.as(Secured.class).protect().withRole("*");
+        deployment.as(Secured.class);//.protect("/items").withRole("*");
         deployment.add(new ClassLoaderAsset("META-INF/persistence.xml"), "WEB-INF/classes/META-INF/persistence.xml");
         container.start();
         container.deploy(deployment);

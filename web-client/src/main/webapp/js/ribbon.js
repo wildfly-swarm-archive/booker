@@ -74,6 +74,8 @@ Ribbon.ajax = function(serviceName, url, data) {
 
   var headers = {};
 
+  console.log( "keycloak token: " + keycloak.token );
+
   if ( keycloak.token ) {
     headers = {
       'Authorization': 'Bearer ' + keycloak.token,
@@ -81,6 +83,7 @@ Ribbon.ajax = function(serviceName, url, data) {
   }
 
   if ( allServers.length > 0 ) {
+    console.log( "headers", headers );
     return $.ajax({
            dataType: "json",
            url: "http://" + allServers[0] + url,

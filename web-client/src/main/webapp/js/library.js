@@ -10,8 +10,8 @@ Booker.Actions.Library.load.listen( function(term) {
     .then( function(data) {
       Booker.Actions.Library.load.completed(data);
     })
-    .fail( function() {
-      console.log( "search failed" );
+    .fail( function(err) {
+      console.log( "search failed", err );
     })
 })
 
