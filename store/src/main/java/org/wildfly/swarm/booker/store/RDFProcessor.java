@@ -64,7 +64,7 @@ public class RDFProcessor {
         this.out = f.createXMLStreamWriter(new FileOutputStream(outputPath.toFile()));
         this.out.writeStartDocument();
         this.out.writeCharacters("\n");
-        this.out.writeStartElement("books");
+        this.out.writeStartElement("library");
     }
 
     public void close() throws XMLStreamException {

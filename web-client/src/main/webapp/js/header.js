@@ -36,7 +36,7 @@ Booker.MenuHeader = React.createClass({
       <ul className="inline-list">
         <li><Link to="about">About</Link></li>
         <li><Link to="account">Account</Link></li>
-        <li><Link to="books">Your Books</Link></li>
+        <li><Link to="library">Your Library</Link></li>
         <li><Link to="store">The Store</Link></li>
       </ul>
     );

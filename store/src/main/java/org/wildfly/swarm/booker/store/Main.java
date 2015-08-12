@@ -37,7 +37,7 @@ public class Main {
             //int limit = Integer.MAX_VALUE;
             int limit = 5000;
             AtomicInteger counter = new AtomicInteger(0);
-            RDFProcessor processor = new RDFProcessor(Paths.get("books.xml"));
+            RDFProcessor processor = new RDFProcessor(Paths.get("library.xml"));
             Files.walkFileTree(Paths.get(System.getProperty("swarm.gutenberg.data")), new SimpleFileVisitor<Path>() {
                 @Override
                 public FileVisitResult visitFile(Path file, BasicFileAttributes attrs) throws IOException {

@@ -29,7 +29,7 @@ import static javax.xml.stream.XMLStreamConstants.START_ELEMENT;
 @ApplicationScoped
 public class Store {
 
-    public static final QName BOOKS = new QName("books");
+    public static final QName BOOKS = new QName("library");
     public static final QName BOOK = new QName("book");
     public static final QName TITLE = new QName("title");
     public static final QName AUTHOR = new QName("author");
@@ -41,7 +41,7 @@ public class Store {
 
     public Store() throws FileNotFoundException, XMLStreamException {
         XMLInputFactory f = XMLInputFactory.newFactory();
-        XMLStreamReader r = f.createXMLStreamReader(new FileInputStream("books.xml"));
+        XMLStreamReader r = f.createXMLStreamReader(new FileInputStream("library.xml"));
 
         while (r.hasNext()) {
             r.next();
