@@ -42,6 +42,7 @@ Booker.Library = React.createClass({
   render: function() {
     return (
       <div>
+        <h1>Your Library</h1>
         <ul>
         {
           this.state.items.map( function(e) {
@@ -59,7 +60,7 @@ Booker.Library = React.createClass({
 Booker.Library.Item = React.createClass({
   render: function() {
     return (
-      <ul>Book {this.props.item.bookId}</ul>
+      <li>{this.props.item.title}</li>
     );
   }
 });

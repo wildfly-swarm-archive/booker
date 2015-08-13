@@ -6,6 +6,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 /**
  * @author Bob McWhirter
@@ -23,6 +24,12 @@ public class LibraryItem {
 
     @Column
     private String bookId;
+
+    @Transient
+    private String title;
+
+    @Transient
+    private String author;
 
     public LibraryItem() {
 
@@ -47,6 +54,22 @@ public class LibraryItem {
 
     public void setBookId(String bookId) {
         this.bookId = bookId;
+    }
+
+    public String getTitle() {
+        return this.title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public String getAuthor() {
+        return this.author;
+    }
+
+    public void setAuthor(String author) {
+        this.author = author;
     }
 
 }

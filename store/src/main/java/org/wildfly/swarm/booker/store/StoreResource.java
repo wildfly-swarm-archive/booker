@@ -45,6 +45,7 @@ public class StoreResource {
     @Path("/book")
     @Produces("application/json")
     public void get(@Suspended final AsyncResponse asyncResponse, @QueryParam("id") String id, @Context SecurityContext context) {
+        System.err.println( "GET: " + id );
         KeycloakPrincipal principal = (KeycloakPrincipal) context.getUserPrincipal();
 
         Book book = this.store.get(id);
