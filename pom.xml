@@ -82,6 +82,17 @@
         <artifactId>wildfly-swarm-jpa</artifactId>
         <version>${version.wildfly-swarm}</version>
       </dependency>
+      <dependency>
+        <groupId>org.wildfly.swarm</groupId>
+        <artifactId>wildfly-swarm-ejb</artifactId>
+        <version>${version.wildfly-swarm}</version>
+      </dependency>
+
+      <dependency>
+        <groupId>org.wildfly.swarm.booker</groupId>
+        <artifactId>booker-common</artifactId>
+        <version>${project.version}</version>
+      </dependency>
     </dependencies>
   </dependencyManagement>
 
@@ -93,6 +104,8 @@
   </dependencies>
 
   <modules>
+    <module>common</module>
+
     <module>accounts</module>
     <module>store</module>
     <module>pricing</module>

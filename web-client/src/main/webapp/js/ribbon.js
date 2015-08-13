@@ -69,30 +69,41 @@ Booker.TopologyService = React.createClass({
 
 Ribbon = {};
 
-Ribbon.ajax = function(serviceName, url, data) {
+Ribbon.ajax = function(serviceName, url, settings) {
   var allServers = Booker.State.Topology.servers( serviceName );
 
-  var headers = {};
-
-  console.log( "keycloak token: " + keycloak.token );
-
-  if ( keycloak.token ) {
-    headers = {
-      'Authorization': 'Bearer ' + keycloak.token,
-    }
+  if ( ! settings ) {
+    settings = {};
   }
 
+  var headers = settings.headers || {};
+
+  if ( keycloak.token ) {
+    headers.Authorization = 'Bearer ' + keycloak.token
+  }
+
+  settings.url = '//' + allServers[0] + url;
+  settings.headers = headers;
+
   if ( allServers.length > 0 ) {
-    console.log( "headers", headers );
-    return $.ajax({
-           dataType: "json",
-           url: "http://" + allServers[0] + url,
-           headers: headers,
-           data: data,
-         });
+    return $.ajax( settings );
   }
 
   var deferred = $.Deferred();
   return deferred.reject();
+}
 
+Ribbon.getJSON = function(serviceName, url, data) {
+  return Ribbon.ajax( serviceName, url, {
+    dataType: 'json',
+    data: data,
+  })
+}
+
+Ribbon.postJSON = function(serviceName, url, data) {
+  return Ribbon.ajax( serviceName, url, {
+    dataType: 'json',
+    method: 'POST',
+    data: data,
+  })
 }

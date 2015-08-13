@@ -1,17 +1,17 @@
 package org.wildfly.swarm.booker.library;
 
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
+import javax.ejb.Stateless;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
+import javax.ws.rs.FormParam;
 import javax.ws.rs.GET;
-import javax.ws.rs.OPTIONS;
+import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
@@ -26,36 +26,31 @@ import org.keycloak.KeycloakPrincipal;
  * @author Bob McWhirter
  */
 @Path("/")
+@Stateless
 public class LibraryResource {
 
     @Inject
     EntityManager em;
 
-    @OPTIONS
-    public Response options() {
-        System.err.println( "options root" );
-        return Response.status(Response.Status.NO_CONTENT).build();
-    }
-
-    // Match sub-resources
-    @OPTIONS
-    @Path("{path:.*}")
-    public Response optionsAll(@PathParam("path") String path) {
-        System.err.println( "options path: " + path );
-        return Response.status(Response.Status.NO_CONTENT).build();
-    }
-
-
     @GET
     @Produces("application/json")
-    @Path( "/items")
-    public List<LibraryItem> getByUserId(@Context SecurityContext context) {
-        System.err.println( "context: " + context.getUserPrincipal() );
-        System.err.println( "em: " + this.em );
+    @Path("/items")
+    public List<LibraryItem> get(@Context SecurityContext context) {
         KeycloakPrincipal principal = (KeycloakPrincipal) context.getUserPrincipal();
         String userId = principal.getName();
         List<LibraryItem> list = new ArrayList<>();
         TypedQuery<LibraryItem> q = this.em.createQuery("SELECT li FROM LibraryItem li WHERE li.userId = :userId", LibraryItem.class);
-        return q.setParameter( "userId", userId ).getResultList();
+        return q.setParameter("userId", userId).getResultList();
+    }
+
+    @POST
+    @Produces("application/json")
+    @Path("/items")
+    public LibraryItem addItem(@Context SecurityContext context, @FormParam("id") String bookId) throws URISyntaxException {
+        KeycloakPrincipal principal = (KeycloakPrincipal) context.getUserPrincipal();
+        String userId = principal.getName();
+        LibraryItem item = new LibraryItem(userId, bookId);
+        em.persist(item);
+        return item;
     }
 }

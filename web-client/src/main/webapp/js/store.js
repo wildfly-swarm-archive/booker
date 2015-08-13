@@ -5,7 +5,7 @@ Booker.Actions.SearchStore = Reflux.createActions({
 
 Booker.Actions.SearchStore.search.listen( function(term) {
 
-  Ribbon.ajax( "store", "/search", { q: term } )
+  Ribbon.getJSON( "store", "/search", { q: term } )
     .then( function(data) {
       Booker.Actions.SearchStore.search.completed(data);
     })
@@ -107,7 +107,7 @@ Booker.StoreItem = React.createClass({
 
     var self = this;
 
-    Ribbon.ajax( "store", "/book", { id: this.getParams().id } )
+    Ribbon.getJSON( "store", "/book", { id: this.getParams().id } )
       .then( function(data) {
         console.log( "got state: ", data );
         self.setState( data )
@@ -123,9 +123,54 @@ Booker.StoreItem = React.createClass({
         <div className="book-title">{this.state.title}</div>
         <div className="book-author">{this.state.author}</div>
         <div className="price">Price ${this.state.price}</div>
+        <Booker.StoreItem.Purchase bookId={this.state.id}/>
       </div>
     );
   }
 })
 
+Booker.StoreItem.Purchase = React.createClass({
+  mixins: [Reflux.connect(Booker.State.Library,"items")],
+
+  componentWillMount: function() {
+    Booker.Actions.Library.load();
+  },
+
+  getInitialState: function() {
+    return {
+      items: [],
+    }
+  },
+
+  purchase: function(event) {
+    event.preventDefault();
+    Ribbon.postJSON( "library", "/items", { id: this.props.bookId } )
+       .then( function(data,xhr) {
+         Booker.Actions.Library.load();
+       })
+       .fail( function(err) {
+         console.log( "failed to library", err );
+       })
+  },
+
+  hasPurchased: function() {
+    var self = this;
+    return this.state.items.some( function(e) {
+      return ( e.bookId == self.props.bookId );
+    })
+  },
+
+  render: function() {
+    if ( this.hasPurchased() ) {
+      return (
+        <div>Purchased</div>
+      )
+    } else {
+      return (
+        <a href="#" onClick={this.purchase}>Purchase Now</a>
+      )
+    }
+  }
+
+})
 

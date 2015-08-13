@@ -30,7 +30,7 @@ public class Main {
                         .module("com.h2database.h2"))
                 .datasource(new Datasource("LibraryDS")
                         .driver("h2")
-                        .connectionURL("jdbc:h2:mem:test;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE")
+                        .connectionURL("jdbc:h2:./library;DB_CLOSE_ON_EXIT=TRUE")
                         .authentication("sa", "sa")));
 
         JAXRSArchive deployment = ShrinkWrap.create(JAXRSArchive.class);
@@ -38,6 +38,7 @@ public class Main {
         deployment.as(RibbonArchive.class).setApplicationName("library");
         deployment.as(Secured.class).protect("/items").withMethod("GET").withRole("*");
         deployment.add(new ClassLoaderAsset("META-INF/persistence.xml"), "WEB-INF/classes/META-INF/persistence.xml");
+        deployment.addAllDependencies();
         container.start();
         container.deploy(deployment);
 

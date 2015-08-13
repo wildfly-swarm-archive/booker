@@ -41,7 +41,7 @@ public class Store {
 
     public Store() throws FileNotFoundException, XMLStreamException {
         XMLInputFactory f = XMLInputFactory.newFactory();
-        XMLStreamReader r = f.createXMLStreamReader(new FileInputStream("library.xml"));
+        XMLStreamReader r = f.createXMLStreamReader(new FileInputStream("store.xml"));
 
         while (r.hasNext()) {
             r.next();
