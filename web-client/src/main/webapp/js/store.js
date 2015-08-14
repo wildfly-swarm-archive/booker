@@ -161,7 +161,11 @@ Booker.StoreItem.Purchase = React.createClass({
   },
 
   render: function() {
-    if ( this.hasPurchased() ) {
+    if ( ! keycloak.token ) {
+      return (
+        <div>Login to Purchase</div>
+      )
+    } else if ( this.hasPurchased() ) {
       return (
         <div>Purchased</div>
       )
