@@ -44,9 +44,7 @@ public class StoreResource {
     @GET
     @Path("/book")
     @Produces("application/json")
-    public void get(@Suspended final AsyncResponse asyncResponse, @QueryParam("id") String id, @Context SecurityContext context) {
-        KeycloakPrincipal principal = (KeycloakPrincipal) context.getUserPrincipal();
-
+    public void get(@Suspended final AsyncResponse asyncResponse, @QueryParam("id") String id) {
         Book book = this.store.get(id);
         Observable<ByteBuf> obs = pricingService.get().observe();
         obs.subscribe(
