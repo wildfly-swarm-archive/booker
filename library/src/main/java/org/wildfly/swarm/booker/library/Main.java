@@ -42,7 +42,7 @@ public class Main {
                 .withRole("*");
 
 
-        deployment.add(new ClassLoaderAsset("META-INF/persistence.xml"), "WEB-INF/classes/META-INF/persistence.xml");
+        deployment.add(new ClassLoaderAsset("META-INF/persistence.xml", Main.class.getClassLoader()), "WEB-INF/classes/META-INF/persistence.xml");
         deployment.addAllDependencies();
         container.start();
         container.deploy(deployment);
