@@ -106,11 +106,9 @@
   <modules>
     <module>common</module>
 
-    <module>accounts</module>
     <module>store</module>
     <module>pricing</module>
     <module>library</module>
-    <module>recommendations</module>
 
     <module>web-client</module>
   </modules>
