@@ -46,7 +46,7 @@ public class StoreResource {
     @Produces("application/json")
     public void get(@Suspended final AsyncResponse asyncResponse, @QueryParam("id") String id) {
         Book book = this.store.get(id);
-        Observable<ByteBuf> obs = pricingService.get().observe();
+        Observable<ByteBuf> obs = pricingService.get(id).observe();
         obs.subscribe(
                 (result) -> {
                     int price = Integer.parseInt(result.toString(Charset.defaultCharset()));

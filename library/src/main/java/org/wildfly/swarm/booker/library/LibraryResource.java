@@ -5,11 +5,7 @@ import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-import java.util.stream.Stream;
 
-import javax.annotation.security.DenyAll;
-import javax.annotation.security.PermitAll;
-import javax.annotation.security.RolesAllowed;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
@@ -31,9 +27,7 @@ import com.fasterxml.jackson.databind.ObjectReader;
 import io.netty.buffer.ByteBuf;
 import io.netty.buffer.ByteBufInputStream;
 import org.keycloak.KeycloakPrincipal;
-import org.keycloak.representations.JsonWebToken;
 import rx.Observable;
-import rx.functions.Func2;
 
 /**
  * @author Bob McWhirter
@@ -54,39 +48,32 @@ public class LibraryResource {
     public void get(@Suspended final AsyncResponse asyncResponse, @Context SecurityContext context) {
         KeycloakPrincipal principal = (KeycloakPrincipal) context.getUserPrincipal();
         String userId = principal.getName();
-        List<LibraryItem> list = new ArrayList<>();
         TypedQuery<LibraryItem> q = this.em.createQuery("SELECT li FROM LibraryItem li WHERE li.userId = :userId", LibraryItem.class);
         List<LibraryItem> items = q.setParameter("userId", userId).getResultList();
 
         Observable<List<LibraryItem>> root = Observable.just(new ArrayList<>());
         for (LibraryItem each : items) {
             Observable<ByteBuf> obs = store.get(each.getBookId()).observe();
-            root = root.zipWith(obs, new Func2<List<LibraryItem>, ByteBuf, List<LibraryItem>>() {
-                @Override
-                public List<LibraryItem> call(List<LibraryItem> libraryItems, ByteBuf byteBuf) {
-                    ObjectMapper mapper = new ObjectMapper();
-                    ObjectReader reader = mapper.reader();
-                    JsonFactory factory = new JsonFactory();
-                    try {
-                        JsonParser parser = factory.createParser(new ByteBufInputStream(byteBuf));
-                        Map map = reader.readValue(parser, Map.class);
-                        each.setTitle((String) map.get("title"));
-                        each.setAuthor((String) map.get("author"));
-                    } catch (IOException e) {
-                        //e.printStackTrace();
-                    }
-                    libraryItems.add(each);
-                    return libraryItems;
+            root = root.zipWith(obs, ((libraryItems, byteBuf) -> {
+                ObjectMapper mapper = new ObjectMapper();
+                ObjectReader reader = mapper.reader();
+                JsonFactory factory = new JsonFactory();
+                try {
+                    JsonParser parser = factory.createParser(new ByteBufInputStream(byteBuf));
+                    Map map = reader.readValue(parser, Map.class);
+                    each.setTitle((String) map.get("title"));
+                    each.setAuthor((String) map.get("author"));
+                } catch (IOException e) {
                 }
-            });
+                libraryItems.add(each);
+                return libraryItems;
+            }));
         }
 
         root.subscribe(
-                (result) -> {
-                    asyncResponse.resume(result);
-                }, (err) -> {
-                    asyncResponse.resume(err);
-                });
+                (result) -> asyncResponse.resume(result),
+                (err) -> asyncResponse.resume(err)
+        );
     }
 
     @POST

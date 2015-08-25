@@ -58,7 +58,6 @@ public class Main {
 
         JAXRSArchive deployment = ShrinkWrap.create(JAXRSArchive.class);
         deployment.addPackage(Main.class.getPackage());
-        deployment.addAsManifestResource(EmptyAsset.INSTANCE, "beans.xml");
         deployment.as(RibbonArchive.class).setApplicationName("store");
         deployment.as(Secured.class);
         deployment.addAllDependencies();

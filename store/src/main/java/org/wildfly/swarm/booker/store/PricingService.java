@@ -9,6 +9,7 @@ import com.netflix.ribbon.proxy.annotation.Http;
 import com.netflix.ribbon.proxy.annotation.Hystrix;
 import com.netflix.ribbon.proxy.annotation.ResourceGroup;
 import com.netflix.ribbon.proxy.annotation.TemplateName;
+import com.netflix.ribbon.proxy.annotation.Var;
 import io.netty.buffer.ByteBuf;
 
 /**
@@ -20,7 +21,7 @@ public interface PricingService {
     @TemplateName("get")
     @Http(
             method = Http.HttpMethod.GET,
-            uri = "/book"
+            uri = "/book/{id}"
     )
-    RibbonRequest<ByteBuf> get();
+    RibbonRequest<ByteBuf> get(@Var("id") String id);
 }
