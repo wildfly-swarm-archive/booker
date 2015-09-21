@@ -42,6 +42,10 @@ Booker.Home = React.createClass({
         Booker is an electronic bookstore powered by WildFly Swarm.
         </p>
         <img src="/images/logo.png" width="400px"/>
+
+        <p>
+        For more information see <Link to="about">the About page</Link>
+        </p>
       </div>
     );
   }
@@ -71,6 +75,61 @@ Booker.About = React.createClass({
       <p>
       <img src="/images/diagram.png"/>
       </p>
+
+      <div className="row">
+      <div className="large-12 columns">
+      <h3>Keycloak</h3>
+      <p>
+      <b>Keycloak</b> is an independent authentication and authorization server that
+      runs apart from any app or microservice.  It provides integrations to social-login
+      and other enterprise backing-stores, such as LDAP and Kerberos. Some of the <b>Booker!</b>
+      services require authenticated users to operate, some just behave differently if the
+      user is authenticated or anonymous.
+      </p>
+      </div>
+      </div>
+
+      <div className="row">
+      <div className="large-6 columns">
+
+      <h3>Web Client</h3>
+      <p>
+      The <b>web client</b> is implemented as a single-page app, with most
+      of the logic occurring within the browser. The client is packaged as
+      a <b>.war</b> file, and then wrapped with WildFly Swarm.  The only
+      server-side component is the Server-Sent Events async servlet which
+      provides the topology of the microservices to the single-page app running in the browser.
+      </p>
+
+      <h3>Library</h3>
+      <p>
+      The <b>library</b> service is used to track which titles have been purchased
+      by a user. This service uses JPA and an SQL datasource to track combinations
+      of <b>user-id</b> and <b>book-id</b>.  Since simple identifiers are not very useful,
+      it subsequently invokes the <b>store</b> service to fill in details about your
+      library, including the title and author of any book in your library.
+      </p>
+      </div>
+
+      <div className="large-6 columns">
+      <h3>Store</h3>
+      <p>
+      The <b>store</b> service provides the ability to search and query the
+      inventory of books, which is kept in-memory (using data from Project Gutenberg).
+      </p>
+
+      <h3>Pricing</h3>
+      <p>
+      The <b>pricing</b> service is used by the store to provide the price of each
+      book.  It uses very simple logic but mostly demonstrates how authentication
+      information can be propagated from the browser, across another service, and
+      on to an even further-away service.  If authentication information is provided,
+      the pricing service prices a book at <b>$9</b>, otherwise, it prices it at <b>$10</b>.
+      </p>
+      </div>
+
+      </div>
+
 
       </div>
 

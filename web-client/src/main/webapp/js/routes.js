@@ -8,7 +8,7 @@ var NotFoundRoute = Router.Route;
 (function() {
   var routes = (
     <Route handler={Booker.App} path="/">
-      <DefaultRoute handler={Booker.Home} />
+      <DefaultRoute name="home" handler={Booker.Home} />
       <Route name="topology" path="topology" handler={Booker.Topology}/>
       <Route name="about" handler={Booker.About} />
       <Route name="library" handler={Booker.CheckAuth}>

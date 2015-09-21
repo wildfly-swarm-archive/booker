@@ -17,7 +17,7 @@ Booker.Header = React.createClass({
     return (
       <div id="header" className="row">
         <div className="large-3 columns">
-          <span id="booker-logo">Booker!</span>
+          <span id="booker-logo"><Link to="home">Booker!</Link></span>
         </div>
         <div className="large-6 columns">
           <Booker.MenuHeader/>
