@@ -143,6 +143,48 @@
     "clientRoles" : {
       "account" : [ "view-profile", "manage-account" ]
     }
+  }, {
+    "id" : "03e88eb9-c2ad-46ca-a8c4-0bce2ef392e0",
+    "createdTimestamp" : 1442863606554,
+    "username" : "jane",
+    "enabled" : true,
+    "totp" : false,
+    "emailVerified" : true,
+    "firstName" : "Jane",
+    "lastName" : "Doe",
+    "email" : "jane@doe.com",
+    "credentials" : [ {
+      "type" : "password",
+      "hashedSaltedValue" : "U44OoP4tdxK1INJAgC2d9RLGmrdjTVgpHDU09aozbLgMZHtZlFrIbIxr05i7seslp2CMAydZYXGjlpCoTgxNdA==",
+      "salt" : "lklrnkvIBsKTILi5XQBRmw==",
+      "hashIterations" : 1,
+      "temporary" : false
+    } ],
+    "requiredActions" : [ ],
+    "clientRoles" : {
+      "account" : [ "view-profile", "manage-account" ]
+    }
+  }, {
+    "id" : "e6972b83-00a0-42dd-a74d-13ec7fdf3086",
+    "createdTimestamp" : 1442863591809,
+    "username" : "john",
+    "enabled" : true,
+    "totp" : false,
+    "emailVerified" : true,
+    "firstName" : "John",
+    "lastName" : "Doe",
+    "email" : "john@doe.com",
+    "credentials" : [ {
+      "type" : "password",
+      "hashedSaltedValue" : "lJjREXdMdYIJWjg02Cyf47Hct1rLD7cG7Mq9AmVbpXYiVLx8LXdVjGVRMf8KhOCvq0dA2bvaI+dRnCxRq7MMUw==",
+      "salt" : "m+Vn09HDhsoG3GGqhanq1g==",
+      "hashIterations" : 1,
+      "temporary" : false
+    } ],
+    "requiredActions" : [ ],
+    "clientRoles" : {
+      "account" : [ "view-profile", "manage-account" ]
+    }
   } ],
   "clientScopeMappings" : {
     "realm-management" : [ {
