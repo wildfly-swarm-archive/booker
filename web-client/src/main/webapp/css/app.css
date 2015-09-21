@@ -1,5 +1,37 @@
 
 
+#header {
+  background-color: #ddd;
+  padding-top: 1em;
+  border: 1px solid #777;
+  border-top: none;
+}
+
+#booker-logo {
+  font-size: 130%;
+  font-style: italic;
+  font-weight: bold;
+}
+
+#footer {
+  font-size: 70%;
+  color: #999;
+  border-top: 1px solid #999;
+}
+
+
+#header ul {
+  line-height: 1.5;
+}
+
+#header ul .active {
+  font-weight: bold;
+}
+
+#welcome {
+  text-align: center;
+}
+
 .book-title {
   font-size: 120%;
   font-weight: bold;
@@ -7,4 +39,9 @@
 
 .book-author {
   font-size: 110%;
+}
+
+.explanation {
+  width: 30%;
+  float: right;
 }

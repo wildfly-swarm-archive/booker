@@ -9,7 +9,7 @@ var NotFoundRoute = Router.Route;
   var routes = (
     <Route handler={Booker.App} path="/">
       <DefaultRoute handler={Booker.Home} />
-      <Route path="topology" handler={Booker.Topology}/>
+      <Route name="topology" path="topology" handler={Booker.Topology}/>
       <Route name="about" handler={Booker.About} />
       <Route name="library" handler={Booker.CheckAuth}>
         <Route name="library-item" path=":id" handler={Booker.Library.Item}/>

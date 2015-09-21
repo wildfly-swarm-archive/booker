@@ -2,7 +2,7 @@
 Booker.Account = React.createClass({
   render: function() {
     return (
-      <div>Your Account</div>
+      <h1>Your Account</h1>
     );
   }
 });
