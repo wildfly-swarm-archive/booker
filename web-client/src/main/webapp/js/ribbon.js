@@ -36,7 +36,7 @@ Booker.Topology = React.createClass({
         <h1>Topology</h1>
         <div className="explanation">
           <p>The <b>topology</b> is the layout of the services,
-          and how they connect together. WildFly Clustering
+          and how they connect together. WildFly node discovery
           is used to link up the NetflixOSS Ribbon components.
           </p>
           <p>

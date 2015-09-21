@@ -59,7 +59,7 @@ Booker.About = React.createClass({
       </p>
 
       <p>
-      The services are wired together using WildFly Clustering and
+      The services are wired together using WildFly node discovery and
       invoked using NetflixOSS Ribbon.
       </p>
 
