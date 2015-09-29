@@ -3,17 +3,18 @@ package org.wildfly.swarm.booker.store;
 import java.nio.charset.Charset;
 
 import javax.inject.Inject;
+import javax.servlet.http.HttpServletRequest;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
 import javax.ws.rs.container.AsyncResponse;
+import javax.ws.rs.container.ContainerRequestContext;
 import javax.ws.rs.container.Suspended;
 import javax.ws.rs.core.Context;
-import javax.ws.rs.core.SecurityContext;
+import javax.ws.rs.core.UriInfo;
 
 import io.netty.buffer.ByteBuf;
-import org.keycloak.KeycloakPrincipal;
 import rx.Observable;
 
 /**
@@ -28,6 +29,9 @@ public class StoreResource {
     @Inject
     private PricingService pricingService;
 
+    @Context
+    private UriInfo uriInfo;
+
     @GET
     @Path("/search")
     @Produces("application/json")
@@ -38,7 +42,9 @@ public class StoreResource {
         if (page == null) {
             page = 1;
         }
-        return this.store.search(q, page - 1);
+        Store.SearchResult results = this.store.search(q, page - 1);
+        results.setRequestUri(uriInfo.getBaseUri().toString());
+        return results;
     }
 
     @GET

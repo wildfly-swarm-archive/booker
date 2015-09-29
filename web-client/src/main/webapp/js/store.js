@@ -94,6 +94,9 @@ Booker.SearchResults = React.createClass({
         }
         </ul>
         <Booker.Pagination pagination={this.state.results}/>
+        <div className="details">
+          Search results from: {this.state.results.requestUri}
+        </div>
       </div>
     )
   }

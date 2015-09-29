@@ -143,6 +143,7 @@ public class Store {
         private final int page;
 
         private final int numPages;
+        private String requestUri = "unknown";
 
         public SearchResult(Collection<Book> results, int page, int numPages) {
             this.results = results;
@@ -160,6 +161,14 @@ public class Store {
 
         public int getNumberOfPages() {
             return this.numPages;
+        }
+
+        public void setRequestUri(String requestUri) {
+            this.requestUri = requestUri;
+        }
+
+        public String getRequestUri() {
+            return this.requestUri;
         }
     }
 
