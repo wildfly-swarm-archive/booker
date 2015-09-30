@@ -66,7 +66,7 @@ Booker.TopologyService = React.createClass({
         {
           this.props.servers.map(function(e){
             return (
-              <li key={e}><a href={"//" + e}>{e}</a></li>
+              <li key={e}>{e}</li>
             )
           })
         }
