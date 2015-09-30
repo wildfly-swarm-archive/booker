@@ -33,3 +33,8 @@ you're browsing anonymously, or $9 if you're logged in.
 Tracks which items are bought by a user using JPA (via an h2 
 database) from a JAX-RS resource.  Communicates with the `store`
 service to associate details with a given book ID.
+
+## `Vagrant`
+A Vagrantfile and support scripts to install and run booker in a 
+virtual machine. Requires Virtualbox and Vagrant be installed.
+
