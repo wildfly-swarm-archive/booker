@@ -6,10 +6,17 @@ Booker.State.Topology = Reflux.createStore({
     this.listenTo( Booker.Actions.Topology, this.output );
     this.sse = new EventSource( "/system/ribbon/stream" );
     this.sse.onmessage = Booker.Actions.Topology;
+    this.sse.onerror = function(e) {
+      console.log( "SSE error", e );
+    }
+    this.sse.onopen = function() {
+      console.log( "SEE opened" );
+    }
     this.topology = {};
   },
 
   output: function(topology) {
+    console.log( "update topology", topology );
     this.topology = JSON.parse( topology.data );
     this.trigger(this.topology);
   },
@@ -82,6 +89,8 @@ Ribbon = {};
 
 Ribbon.ajax = function(serviceName, url, settings) {
   var allServers = Booker.State.Topology.servers( serviceName );
+
+  console.log( "servers for [" + serviceName + "]", allServers );
 
   if ( ! settings ) {
     settings = {};

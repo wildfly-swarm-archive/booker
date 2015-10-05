@@ -26,7 +26,7 @@ import org.wildfly.swarm.netflix.ribbon.RibbonTopologyListener;
 /**
  * @author Bob McWhirter
  */
-@WebServlet( urlPatterns = { "/system/ribbon/stream"}, asyncSupported = true)
+@WebServlet(urlPatterns = {"/system/ribbon/stream"}, asyncSupported = true)
 public class RibbonToTheCurbSSEServlet extends HttpServlet {
 
     private RibbonTopology topology;
@@ -54,78 +54,100 @@ public class RibbonToTheCurbSSEServlet extends HttpServlet {
         AsyncContext asyncContext = req.startAsync();
         PrintWriter writer = resp.getWriter();
 
+        Object writeLock = new Object();
 
         RibbonTopologyListener topologyListener = new RibbonTopologyListener() {
             @Override
             public void onChange(RibbonTopology topology) {
                 String json = topologyToJson();
-                writer.write( "data: " + json );
-                writer.flush();
+                synchronized (writeLock) {
+                    writer.write("data: " + json);
+                    writer.flush();
+                }
             }
         };
+
+        Thread keepAlive = new Thread(() -> {
+            while (true) {
+                try {
+                    Thread.sleep(15_000);
+                    synchronized (writeLock) {
+                        writer.write(":\n\n");
+                        writer.flush();
+                    }
+                } catch (InterruptedException e) {
+                    break;
+                }
+            }
+        });
 
         asyncContext.setTimeout(0);
         asyncContext.addListener(new AsyncListener() {
             @Override
             public void onComplete(AsyncEvent asyncEvent) throws IOException {
-                RibbonToTheCurbSSEServlet.this.topology.removeListener( topologyListener );
+                RibbonToTheCurbSSEServlet.this.topology.removeListener(topologyListener);
+                keepAlive.interrupt();
             }
 
             @Override
             public void onTimeout(AsyncEvent asyncEvent) throws IOException {
-                RibbonToTheCurbSSEServlet.this.topology.removeListener( topologyListener );
+                RibbonToTheCurbSSEServlet.this.topology.removeListener(topologyListener);
+                keepAlive.interrupt();
             }
 
             @Override
             public void onError(AsyncEvent asyncEvent) throws IOException {
-                RibbonToTheCurbSSEServlet.this.topology.removeListener( topologyListener );
+                RibbonToTheCurbSSEServlet.this.topology.removeListener(topologyListener);
+                keepAlive.interrupt();
             }
 
             @Override
             public void onStartAsync(AsyncEvent asyncEvent) throws IOException {
             }
-        } );
+        });
 
 
-        this.topology.addListener( topologyListener );
+        this.topology.addListener(topologyListener);
         String json = topologyToJson();
-        writer.write( "data: " + json );
+        writer.write("data: " + json);
         writer.flush();
+
+        keepAlive.start();
 
     }
 
     protected String topologyToJson() {
         StringBuilder json = new StringBuilder();
 
-        json.append( "{" );
+        json.append("{");
 
         Map<String, List<String>> map = this.topology.asMap();
 
         Set<String> keys = map.keySet();
         Iterator<String> keyIter = keys.iterator();
 
-        while ( keyIter.hasNext() ) {
+        while (keyIter.hasNext()) {
             String key = keyIter.next();
-            json.append( "  " ).append( '"' ).append( key ).append( '"' ).append(": [");
+            json.append("  ").append('"').append(key).append('"').append(": [");
             List<String> list = map.get(key);
             Iterator<String> listIter = list.iterator();
-            while ( listIter.hasNext() ) {
+            while (listIter.hasNext()) {
                 String server = listIter.next();
-                json.append("    " ).append( '"' ).append( server ).append('"');
-                if ( listIter.hasNext() ) {
-                    json.append( ", " );
+                json.append("    ").append('"').append(server).append('"');
+                if (listIter.hasNext()) {
+                    json.append(", ");
                 }
-                json.append( "" );
+                json.append("");
             }
 
-            json.append( "  ]" );
-            if ( keyIter.hasNext() ) {
-                json.append( "," );
+            json.append("  ]");
+            if (keyIter.hasNext()) {
+                json.append(",");
             }
-            json.append( "" );
+            json.append("");
         }
 
-        json.append( "}\n\n" );
+        json.append("}\n\n");
 
         return json.toString();
     }
