@@ -3,7 +3,7 @@
   "realm" : "booker",
   "notBefore" : 0,
   "accessTokenLifespan" : 300,
-  "ssoSessionIdleTimeout" : 1800,
+  "ssoSessionIdleTimeout" : 36000,
   "ssoSessionMaxLifespan" : 36000,
   "accessCodeLifespan" : 60,
   "accessCodeLifespanUserAction" : 300,
