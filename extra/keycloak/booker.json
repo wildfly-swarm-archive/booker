@@ -298,7 +298,7 @@
     "surrogateAuthRequired" : false,
     "enabled" : true,
     "secret" : "deec63e4-d242-4180-b402-80fba0a9187e",
-    "redirectUris" : [ "http://localhost:8080/*" ],
+    "redirectUris" : [ "*" ],
     "webOrigins" : [ "*" ],
     "notBefore" : 0,
     "bearerOnly" : false,
