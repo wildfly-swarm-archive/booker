@@ -74,7 +74,7 @@ Booker.Authenticated = React.createClass({
     return (
       <ul className="inline-list">
         <li><Booker.UserInfo/></li>
-        <li><a href={keycloak.createLogoutUrl({redirectUri: 'http://localhost:8080/'})}>Logout</a></li>
+        <li><a href={keycloak.createLogoutUrl({redirectUri: document.location.protocol + "//" + document.location.host})}>Logout</a></li>
       </ul>
     )
   }
