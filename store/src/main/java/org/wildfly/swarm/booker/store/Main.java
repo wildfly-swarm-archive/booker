@@ -12,6 +12,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 import javax.xml.stream.XMLStreamException;
 
 import org.jboss.shrinkwrap.api.ShrinkWrap;
+import org.jboss.shrinkwrap.api.asset.ClassLoaderAsset;
 import org.jboss.shrinkwrap.api.asset.EmptyAsset;
 import org.wildfly.swarm.container.Container;
 import org.wildfly.swarm.jaxrs.JAXRSArchive;
@@ -29,7 +30,7 @@ public class Main {
             //int limit = Integer.MAX_VALUE;
             int limit = 5000;
             AtomicInteger counter = new AtomicInteger(0);
-            RDFProcessor processor = new RDFProcessor(Paths.get("store.xml"));
+            RDFProcessor processor = new RDFProcessor(Paths.get("src", "main", "resources", "META-INF", "store.xml"));
             Files.walkFileTree(Paths.get(System.getProperty("swarm.gutenberg.data")), new SimpleFileVisitor<Path>() {
                 @Override
                 public FileVisitResult visitFile(Path file, BasicFileAttributes attrs) throws IOException {

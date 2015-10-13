@@ -2,6 +2,7 @@ package org.wildfly.swarm.booker.store;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
@@ -39,9 +40,10 @@ public class Store {
     private Map<String,List<Book>> booksByAuthor = new TreeMap<>();
     private Map<String,List<Book>> booksByTitle = new TreeMap<>();
 
-    public Store() throws FileNotFoundException, XMLStreamException {
+    public Store() throws XMLStreamException {
         XMLInputFactory f = XMLInputFactory.newFactory();
-        XMLStreamReader r = f.createXMLStreamReader(new FileInputStream("store.xml"));
+        InputStream storeStream = Store.class.getClassLoader().getResourceAsStream("META-INF/store.xml");
+        XMLStreamReader r = f.createXMLStreamReader(storeStream);
 
         while (r.hasNext()) {
             r.next();
