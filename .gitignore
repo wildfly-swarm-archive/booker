@@ -10,3 +10,9 @@ tmp
 .classpath
 .project
 .settings/
+
+# vagrant stuff
+.vagrant
+*.zip
+*.gz
+*.jar

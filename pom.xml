@@ -37,6 +37,7 @@
               <jboss.bind.address>127.0.0.1</jboss.bind.address>
               <java.net.preferIPv4Stack>true</java.net.preferIPv4Stack>
               <jboss.node.name>${project.artifactId}</jboss.node.name>
+
 <!--
               <swarm.logstash.hostname>localhost</swarm.logstash.hostname>
               <swarm.logstash.port>8000</swarm.logstash.port>
@@ -60,6 +61,11 @@
       <dependency>
         <groupId>org.wildfly.swarm</groupId>
         <artifactId>wildfly-swarm-jaxrs</artifactId>
+        <version>${version.wildfly-swarm}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.wildfly.swarm</groupId>
+        <artifactId>wildfly-swarm-hawkular</artifactId>
         <version>${version.wildfly-swarm}</version>
       </dependency>
       <dependency>
