@@ -18,13 +18,14 @@ public class Main {
 
     public static void main(String... args) throws Exception {
 
-
         Container container = new Container();
         container.fraction(new JPAFraction()
                 .inhibitDefaultDatasource()
                 .defaultDatasource("LibraryDS"));
+
         container.fraction(new DatasourcesFraction()
                 .jdbcDriver(new JdbcDriver("h2")
+                        .driverName("h2")
                         .driverDatasourceClassName("org.h2.Driver")
                         .xaDatasourceClass("org.h2.jdbcx.JdbcDataSource")
                         .driverModuleName("com.h2database.h2"))
