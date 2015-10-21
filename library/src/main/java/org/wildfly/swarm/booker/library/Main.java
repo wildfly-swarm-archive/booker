@@ -31,6 +31,7 @@ public class Main {
                         .driverModuleName("com.h2database.h2"))
                 .dataSource(new DataSource("LibraryDS")
                         .driverName("h2")
+                        .jndiName("java:/LibraryDS")
                         .connectionUrl("jdbc:h2:./library;DB_CLOSE_ON_EXIT=TRUE")
                         .userName("sa")
                         .password( "sa" )));
