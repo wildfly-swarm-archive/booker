@@ -132,4 +132,32 @@
     <module>web-client</module>
   </modules>
 
+  <repositories>
+    <repository>
+      <id>bees-snapshot-repository-group</id>
+      <name>CloudBees Snapshot Repository Group</name>
+      <url>http://repository-projectodd.forge.cloudbees.com/snapshot/</url>
+      <releases>
+        <enabled>false</enabled>
+      </releases>
+      <snapshots>
+        <enabled>true</enabled>
+      </snapshots>
+    </repository>
+  </repositories>
+
+  <pluginRepositories>
+    <pluginRepository>
+      <id>bees-snapshot-repository-group</id>
+      <name>CloudBees Snapshot Repository Group</name>
+      <url>http://repository-projectodd.forge.cloudbees.com/snapshot/</url>
+      <releases>
+        <enabled>false</enabled>
+      </releases>
+      <snapshots>
+        <enabled>true</enabled>
+      </snapshots>
+    </pluginRepository>
+  </pluginRepositories>
+
 </project>
