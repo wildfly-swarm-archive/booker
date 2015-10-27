@@ -3,9 +3,9 @@ package org.wildfly.swarm.booker.library;
 import org.jboss.shrinkwrap.api.ShrinkWrap;
 import org.jboss.shrinkwrap.api.asset.ClassLoaderAsset;
 import org.wildfly.swarm.config.datasources.DataSource;
-import org.wildfly.swarm.config.datasources.JdbcDriver;
 import org.wildfly.swarm.container.Container;
 import org.wildfly.swarm.datasources.DatasourcesFraction;
+import org.wildfly.swarm.datasources.JDBCDriver;
 import org.wildfly.swarm.jaxrs.JAXRSArchive;
 import org.wildfly.swarm.jpa.JPAFraction;
 import org.wildfly.swarm.keycloak.Secured;
@@ -24,7 +24,7 @@ public class Main {
                 .defaultDatasource("LibraryDS"));
 
         container.fraction(new DatasourcesFraction()
-                .jdbcDriver(new JdbcDriver("h2")
+                .jdbcDriver(new JDBCDriver("h2")
                         .driverName("h2")
                         .driverDatasourceClassName("org.h2.Driver")
                         .xaDatasourceClass("org.h2.jdbcx.JdbcDataSource")
