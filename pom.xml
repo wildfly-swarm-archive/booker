@@ -13,7 +13,7 @@
   <packaging>pom</packaging>
 
   <properties>
-    <version.wildfly-swarm>1.0.0.Alpha5</version.wildfly-swarm>
+    <version.wildfly-swarm>1.0.0.Alpha6-SNAPSHOT</version.wildfly-swarm>
 
     <maven.min.version>3.2.1</maven.min.version>
 
@@ -75,6 +75,11 @@
       <dependency>
         <groupId>org.wildfly.swarm</groupId>
         <artifactId>wildfly-swarm-ribbon-secured</artifactId>
+        <version>${version.wildfly-swarm}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.wildfly.swarm</groupId>
+        <artifactId>wildfly-swarm-ribbon-webapp</artifactId>
         <version>${version.wildfly-swarm}</version>
       </dependency>
       <dependency>

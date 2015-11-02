@@ -20,7 +20,7 @@
   <name>Booker: Web Client</name>
   <description>Booker: Web Client</description>
 
-  <packaging>war</packaging>
+  <packaging>jar</packaging>
 
   <properties>
     <version.foundation>5.5.2</version.foundation>
@@ -29,14 +29,11 @@
   <build>
     <plugins>
       <plugin>
-        <artifactId>maven-war-plugin</artifactId>
-        <configuration>
-          <failOnMissingWebXml>false</failOnMissingWebXml>
-        </configuration>
-      </plugin>
-      <plugin>
         <groupId>org.wildfly.swarm</groupId>
         <artifactId>wildfly-swarm-plugin</artifactId>
+        <configuration>
+          <mainClass>org.wildfly.swarm.booker.Main</mainClass>
+        </configuration>
         <executions>
           <execution>
             <goals>
@@ -53,6 +50,10 @@
       <groupId>org.wildfly.swarm</groupId>
       <artifactId>wildfly-swarm-undertow</artifactId>
     </dependency>
+      <dependency>
+          <groupId>org.wildfly.swarm</groupId>
+          <artifactId>wildfly-swarm-ribbon-webapp</artifactId>
+      </dependency>
     <dependency>
       <groupId>org.webjars</groupId>
       <artifactId>foundation</artifactId>
