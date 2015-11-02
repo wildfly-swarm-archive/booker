@@ -13,6 +13,7 @@ public class Main {
         container.start();
         WARArchive war = ShrinkWrap.create(WARArchive.class);
         war.staticContent();
+        war.addAllDependencies();
         container.deploy(war);
     }
 }
