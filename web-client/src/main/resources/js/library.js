@@ -1,6 +1,3 @@
-
-
-
 Booker.Actions.Library = Reflux.createActions({
     "load": {children: ["completed","failed"]}
 });

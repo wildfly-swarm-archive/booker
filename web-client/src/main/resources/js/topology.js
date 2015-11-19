@@ -2,16 +2,9 @@ Booker.Actions.Topology = Reflux.createAction();
 
 Booker.State.Topology = Reflux.createStore({
   init: function() {
-    this.listenTo( Booker.Actions.Topology, this.output );
-    this.sse = new EventSource( "/ribbon/system/stream" );
-    this.sse.onmessage = Booker.Actions.Topology;
-    this.sse.onerror = function(e) {
-      console.log( "SSE error", e );
-    }
-    this.sse.onopen = function() {
-      console.log( "SEE opened" );
-    }
     this.topology = {};
+    this.listenTo( Booker.Actions.Topology, this.output );
+    Ribbon.topologyEvents.addEventListener("topologyChange", Booker.Actions.Topology);
   },
 
   output: function(topology) {
