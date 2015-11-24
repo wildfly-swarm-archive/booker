@@ -12,12 +12,11 @@ import java.util.concurrent.atomic.AtomicInteger;
 import javax.xml.stream.XMLStreamException;
 
 import org.jboss.shrinkwrap.api.ShrinkWrap;
-import org.jboss.shrinkwrap.api.asset.ClassLoaderAsset;
-import org.jboss.shrinkwrap.api.asset.EmptyAsset;
 import org.wildfly.swarm.container.Container;
 import org.wildfly.swarm.jaxrs.JAXRSArchive;
 import org.wildfly.swarm.keycloak.Secured;
 import org.wildfly.swarm.netflix.ribbon.RibbonArchive;
+import org.wildfly.swram.booker.common.ContainerUtils;
 
 /**
  * @author Bob McWhirter
@@ -56,6 +55,7 @@ public class Main {
 
 
         Container container = new Container();
+        container.fraction(ContainerUtils.loggingFraction());
 
         JAXRSArchive deployment = ShrinkWrap.create(JAXRSArchive.class);
         deployment.addPackage(Main.class.getPackage());

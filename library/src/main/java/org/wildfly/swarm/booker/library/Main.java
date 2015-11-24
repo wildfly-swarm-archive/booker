@@ -10,6 +10,7 @@ import org.wildfly.swarm.jaxrs.JAXRSArchive;
 import org.wildfly.swarm.jpa.JPAFraction;
 import org.wildfly.swarm.keycloak.Secured;
 import org.wildfly.swarm.netflix.ribbon.RibbonArchive;
+import org.wildfly.swram.booker.common.ContainerUtils;
 
 /**
  * @author Bob McWhirter
@@ -19,6 +20,7 @@ public class Main {
     public static void main(String... args) throws Exception {
 
         Container container = new Container();
+        container.fraction(ContainerUtils.loggingFraction());
         container.fraction(new JPAFraction()
                 .inhibitDefaultDatasource()
                 .defaultDatasource("LibraryDS"));

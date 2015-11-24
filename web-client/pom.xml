@@ -50,10 +50,14 @@
       <groupId>org.wildfly.swarm</groupId>
       <artifactId>wildfly-swarm-undertow</artifactId>
     </dependency>
-      <dependency>
-          <groupId>org.wildfly.swarm</groupId>
-          <artifactId>wildfly-swarm-ribbon-webapp</artifactId>
-      </dependency>
+    <dependency>
+      <groupId>org.wildfly.swarm</groupId>
+      <artifactId>wildfly-swarm-ribbon-webapp</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.wildfly.swarm.booker</groupId>
+      <artifactId>booker-common</artifactId>
+    </dependency>
     <dependency>
       <groupId>org.webjars</groupId>
       <artifactId>foundation</artifactId>
