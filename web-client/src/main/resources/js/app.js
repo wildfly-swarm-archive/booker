@@ -1,11 +1,13 @@
-var Router        = ReactRouter;
-var RouteHandler  = Router.RouteHandler;
+var Router        = ReactRouter,
+    RouteHandler  = Router.RouteHandler,
+    keycloak;
 
 Booker = {};
 Booker.State = {};
 Booker.Actions = {};
 
-var keycloak= new Keycloak('http://localhost:8080/keycloak.json');
+if (typeof Keycloak === 'function')
+  keycloak= new Keycloak('http://localhost:8080/keycloak.json');
 
 Booker.App = React.createClass({
 

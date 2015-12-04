@@ -4,12 +4,12 @@ Booker.State.Topology = Reflux.createStore({
   init: function() {
     this.topology = {};
     this.listenTo( Booker.Actions.Topology, this.output );
-    Ribbon.topologyEvents.addEventListener("topologyChange", Booker.Actions.Topology);
+    Ribbon.onTopologyChange(Booker.Actions.Topology);
   },
 
   output: function(topology) {
     console.log( "update topology", topology );
-    this.topology = JSON.parse( topology.data );
+    this.topology = JSON.parse( topology );
     this.trigger(this.topology);
   },
 

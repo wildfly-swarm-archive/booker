@@ -26,14 +26,16 @@ var NotFoundRoute = Router.Route;
   );
 
 
-  keycloak.init({ onLoad: 'check-sso' }).success( function() {
-    if ( keycloak.authenticated ) {
-      keycloak.loadUserInfo().success( function(info) {
-        Booker.Actions.UserLoggedIn( info );
+  if (keycloak) {
+    keycloak.init({ onLoad: 'check-sso' }).success( function() {
+      if ( keycloak.authenticated ) {
+        keycloak.loadUserInfo().success( function(info) {
+          Booker.Actions.UserLoggedIn( info );
+        });
+      }
+      Router.run(routes, Router.HistoryLocation, function (Handler) {
+        React.render(<Handler/>, document.getElementById('app'));
       });
-    }
-    Router.run(routes, Router.HistoryLocation, function (Handler) {
-      React.render(<Handler/>, document.getElementById('app'));
     });
-  })
+  }
 })();
