@@ -10,7 +10,7 @@ import org.wildfly.swarm.jaxrs.JAXRSArchive;
 import org.wildfly.swarm.jpa.JPAFraction;
 import org.wildfly.swarm.keycloak.Secured;
 import org.wildfly.swarm.netflix.ribbon.RibbonArchive;
-import org.wildfly.swram.booker.common.ContainerUtils;
+import org.wildfly.swarm.booker.common.ContainerUtils;
 
 /**
  * @author Bob McWhirter

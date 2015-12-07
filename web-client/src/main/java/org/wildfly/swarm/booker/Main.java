@@ -3,7 +3,7 @@ package org.wildfly.swarm.booker;
 import org.jboss.shrinkwrap.api.ShrinkWrap;
 import org.wildfly.swarm.container.Container;
 import org.wildfly.swarm.undertow.WARArchive;
-import org.wildfly.swram.booker.common.ContainerUtils;
+import org.wildfly.swarm.booker.common.ContainerUtils;
 
 /**
  * @author Lance Ball

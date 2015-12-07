@@ -1,4 +1,4 @@
-package org.wildfly.swram.booker.common;
+package org.wildfly.swarm.booker.common;
 
 import java.io.IOException;
 
