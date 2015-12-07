@@ -11,6 +11,6 @@ ENV BOOKER_JSON /tmp/booker.json
 
 COPY ./booker.json $BOOKER_JSON
 
-RUN chmod -R go+rw $JBOSS_HOME
+RUN chmod -R go+rw $JBOSS_HOME/standalone
 
 CMD ["/opt/jboss/keycloak/bin/standalone.sh", "-b", "0.0.0.0", "-Dkeycloak.migration.action=import", "-Dkeycloak.migration.provider=singleFile", "-Dkeycloak.migration.strategy=OVERWRITE_EXISTING", "-Dkeycloak.migration.file=$BOOKER_JSON"]
