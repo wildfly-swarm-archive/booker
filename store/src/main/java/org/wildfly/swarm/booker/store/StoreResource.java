@@ -1,21 +1,19 @@
 package org.wildfly.swarm.booker.store;
 
-import java.nio.charset.Charset;
+import io.netty.buffer.ByteBuf;
+import rx.Observable;
 
 import javax.inject.Inject;
-import javax.servlet.http.HttpServletRequest;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
 import javax.ws.rs.container.AsyncResponse;
-import javax.ws.rs.container.ContainerRequestContext;
 import javax.ws.rs.container.Suspended;
 import javax.ws.rs.core.Context;
+import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.UriInfo;
-
-import io.netty.buffer.ByteBuf;
-import rx.Observable;
+import java.nio.charset.Charset;
 
 /**
  * @author Bob McWhirter
@@ -34,7 +32,7 @@ public class StoreResource {
 
     @GET
     @Path("/search")
-    @Produces("application/json")
+    @Produces(MediaType.APPLICATION_JSON)
     public Store.SearchResult search(@QueryParam("q") String q, @QueryParam("page") Integer page) {
         if (q == null) {
             return Store.SearchResult.EMPTY;
@@ -49,7 +47,7 @@ public class StoreResource {
 
     @GET
     @Path("/book")
-    @Produces("application/json")
+    @Produces(MediaType.APPLICATION_JSON)
     public void get(@Suspended final AsyncResponse asyncResponse, @QueryParam("id") String id) {
         Book book = this.store.get(id);
         Observable<ByteBuf> obs = pricingService.get(id).observe();

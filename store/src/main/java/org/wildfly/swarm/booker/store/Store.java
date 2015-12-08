@@ -1,28 +1,14 @@
 package org.wildfly.swarm.booker.store;
 
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.InputStream;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
-import java.util.TreeMap;
-
 import javax.enterprise.context.ApplicationScoped;
 import javax.xml.namespace.QName;
 import javax.xml.stream.XMLInputFactory;
 import javax.xml.stream.XMLStreamException;
 import javax.xml.stream.XMLStreamReader;
+import java.io.InputStream;
+import java.util.*;
 
-import static javax.xml.stream.XMLStreamConstants.END_DOCUMENT;
-import static javax.xml.stream.XMLStreamConstants.END_ELEMENT;
-import static javax.xml.stream.XMLStreamConstants.START_DOCUMENT;
-import static javax.xml.stream.XMLStreamConstants.START_ELEMENT;
+import static javax.xml.stream.XMLStreamConstants.*;
 
 /**
  * @author Bob McWhirter
@@ -117,7 +103,7 @@ public class Store {
 
         List<Book> list = this.booksByAuthor.get(author);
         if ( list == null ) {
-            list = new ArrayList<Book>();
+            list = new ArrayList<>();
             this.booksByAuthor.put( author.toLowerCase(), list );
         }
         list.add( book );

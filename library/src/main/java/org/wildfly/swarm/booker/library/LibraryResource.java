@@ -14,6 +14,7 @@ import javax.ws.rs.*;
 import javax.ws.rs.container.AsyncResponse;
 import javax.ws.rs.container.Suspended;
 import javax.ws.rs.core.Context;
+import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.SecurityContext;
 
 import com.fasterxml.jackson.core.JsonFactory;
@@ -39,7 +40,7 @@ public class LibraryResource {
     EntityManager em;
 
     @GET
-    @Produces("application/json")
+    @Produces(MediaType.APPLICATION_JSON)
     @Path("/items")
     public void get(@Suspended final AsyncResponse asyncResponse, @Context SecurityContext context) {
         KeycloakPrincipal principal = (KeycloakPrincipal) context.getUserPrincipal();
@@ -68,14 +69,14 @@ public class LibraryResource {
         }
 
         root.subscribe(
-                (result) -> asyncResponse.resume(result),
-                (err) -> asyncResponse.resume(err)
+                asyncResponse::resume,
+                asyncResponse::resume
         );
     }
 
     @POST
-    @Consumes("application/json")
-    @Produces("application/json")
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
     @Path("/items")
     public LibraryItem addItem(@Context SecurityContext context, LibraryItem item) throws URISyntaxException {
         KeycloakPrincipal principal = (KeycloakPrincipal) context.getUserPrincipal();
