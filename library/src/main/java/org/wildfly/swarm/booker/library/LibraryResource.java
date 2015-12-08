@@ -10,11 +10,7 @@ import javax.ejb.Stateless;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
-import javax.ws.rs.FormParam;
-import javax.ws.rs.GET;
-import javax.ws.rs.POST;
-import javax.ws.rs.Path;
-import javax.ws.rs.Produces;
+import javax.ws.rs.*;
 import javax.ws.rs.container.AsyncResponse;
 import javax.ws.rs.container.Suspended;
 import javax.ws.rs.core.Context;
@@ -64,6 +60,7 @@ public class LibraryResource {
                     each.setTitle((String) map.get("title"));
                     each.setAuthor((String) map.get("author"));
                 } catch (IOException e) {
+                    System.err.println("Error: " + e.getLocalizedMessage());
                 }
                 libraryItems.add(each);
                 return libraryItems;
@@ -77,12 +74,12 @@ public class LibraryResource {
     }
 
     @POST
+    @Consumes("application/json")
     @Produces("application/json")
     @Path("/items")
-    public LibraryItem addItem(@Context SecurityContext context, @FormParam("id") String bookId) throws URISyntaxException {
+    public LibraryItem addItem(@Context SecurityContext context, LibraryItem item) throws URISyntaxException {
         KeycloakPrincipal principal = (KeycloakPrincipal) context.getUserPrincipal();
-        String userId = principal.getName();
-        LibraryItem item = new LibraryItem(userId, bookId);
+        item.setUserId(principal.getName());
         em.persist(item);
         return item;
     }

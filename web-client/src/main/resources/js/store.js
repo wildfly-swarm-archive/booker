@@ -1,18 +1,15 @@
-
 Booker.Actions.SearchStore = Reflux.createActions({
     "search": {children: ["completed","failed"]}
 });
 
 Booker.Actions.SearchStore.search.listen( function(term) {
-
   Ribbon.getJSON( "store", "/search", { q: term } )
     .then( function(data) {
       Booker.Actions.SearchStore.search.completed(data);
-    })
-    .fail( function() {
-      console.log( "search failed" );
-    })
-})
+    }, function(e) {
+      console.log( "search failed", e );
+    });
+});
 
 Booker.State.StoreSearchResults = Reflux.createStore({
   init: function() {
@@ -98,23 +95,20 @@ Booker.SearchResults = React.createClass({
           Search results from: {this.state.results.requestUri}
         </div>
       </div>
-    )
+    );
   }
-})
+});
 
 Booker.StoreItem = React.createClass({
   mixins: [Router.State],
 
   componentWillMount: function() {
-    console.log( "about to mount: " + this.getParams().id);
-
     var self = this;
 
     Ribbon.getJSON( "store", "/book", { id: this.getParams().id } )
       .then( function(data) {
-        console.log( "got state: ", data );
         self.setState( data )
-      })
+      });
   },
 
   render: function() {
@@ -130,7 +124,7 @@ Booker.StoreItem = React.createClass({
       </div>
     );
   }
-})
+});
 
 Booker.StoreItem.Purchase = React.createClass({
   mixins: [Reflux.connect(Booker.State.Library,"items")],
@@ -141,43 +135,41 @@ Booker.StoreItem.Purchase = React.createClass({
 
   getInitialState: function() {
     return {
-      items: [],
-    }
+      items: []
+    };
   },
 
   purchase: function(event) {
     event.preventDefault();
-    Ribbon.postJSON( "library", "/items", { id: this.props.bookId } )
-       .then( function(data,xhr) {
+    Ribbon.postJSON( "library", "/items", { bookId: this.props.bookId } )
+       .then( function(data) {
          Booker.Actions.Library.load();
-       })
-       .fail( function(err) {
-         console.log( "failed to library", err );
-       })
+       }, function(err) {
+         console.log( "failed to purchase", err );
+       });
   },
 
   hasPurchased: function() {
     var self = this;
     return this.state.items.some( function(e) {
       return ( e.bookId == self.props.bookId );
-    })
+    });
   },
 
   render: function() {
-    if ( ! keycloak.token ) {
+    if ( keycloak && !keycloak.token ) {
       return (
         <div>Login to Purchase</div>
-      )
+      );
     } else if ( this.hasPurchased() ) {
       return (
         <div>Purchased</div>
-      )
+      );
     } else {
       return (
         <a href="#" onClick={this.purchase}>Purchase Now</a>
-      )
+      );
     }
   }
 
-})
-
+});

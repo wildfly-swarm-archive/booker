@@ -6,11 +6,10 @@ Booker.Actions.Library.load.listen( function(term) {
   Ribbon.ajax( "library", "/items" )
     .then( function(data) {
       Booker.Actions.Library.load.completed(data);
-    })
-    .fail( function(err) {
+    }, function(err) {
       console.log( "search failed", err );
-    })
-})
+    });
+});
 
 Booker.State.Library = Reflux.createStore({
 

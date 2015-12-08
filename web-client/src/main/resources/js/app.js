@@ -6,9 +6,6 @@ Booker = {};
 Booker.State = {};
 Booker.Actions = {};
 
-if (typeof Keycloak === 'function')
-  keycloak= new Keycloak('keycloak.json');
-
 Booker.App = React.createClass({
 
   render: function() {

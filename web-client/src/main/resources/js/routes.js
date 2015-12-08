@@ -26,11 +26,14 @@ var NotFoundRoute = Router.Route;
   );
 
 
+  console.log("Keycloak object", keycloak);
   if (keycloak) {
     keycloak.init({ onLoad: 'check-sso' }).success( function() {
       if ( keycloak.authenticated ) {
+        console.log("Keycloak authenticated");
         keycloak.loadUserInfo().success( function(info) {
           Booker.Actions.UserLoggedIn( info );
+          console.log("Keycloak user info", info);
         });
       }
       Router.run(routes, Router.HistoryLocation, function (Handler) {

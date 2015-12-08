@@ -13,7 +13,11 @@
 
     <script src="/ribbon/ribbon.js"></script>
     <script language="javascript">
-      var Ribbon = ribbon();
+      if (typeof Keycloak === 'function') {
+        keycloak = new Keycloak('http://localhost:8080/keycloak.json');
+      }
+
+      var Ribbon = ribbon({keycloak: keycloak});
     </script>
 
     <script type="text/jsx" src="/js/topology.js"></script>

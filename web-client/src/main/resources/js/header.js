@@ -1,4 +1,3 @@
-
 Booker.Actions.UserLoggedIn = Reflux.createAction();
 
 Booker.State.UserInfo = Reflux.createStore({
@@ -45,7 +44,7 @@ Booker.MenuHeader = React.createClass({
 
 Booker.AuthHeader = React.createClass({
   render: function() {
-    if ( keycloak.authenticated ) {
+    if ( keycloak && keycloak.authenticated ) {
       return (
         <Booker.Authenticated/>
       )
