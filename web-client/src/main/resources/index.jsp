@@ -1,14 +1,14 @@
-<%@page contentType="text/html"%>
+<%@page contentType="text/html"
+  import="org.wildfly.swarm.booker.common.*"%>
 
 <%
-  String keycloakHost = System.getenv("KEYCLOAK_SERVICE_HOST");
-  if (keycloakHost == null) {
-    keycloakHost = "localhost";
-  }
+  String keycloakHost = Discoverer.serviceHost("booker-keycloak", "localhost");
+  int keycloakPort = Discoverer.servicePort("booker-keycloak", 9090);
 
-  String keycloakPort = System.getenv("KEYCLOAK_SERVICE_PORT");
-  if (keycloakPort == null) {
-    keycloakPort = "9090";
+  String externalKeycloakHost = Discoverer.serviceHostToExternalHost(keycloakHost);
+  if (!externalKeycloakHost.equals(keycloakHost)) {
+    keycloakHost = externalKeycloakHost;
+    keycloakPort = request.getServerPort();
   }
 %>
 

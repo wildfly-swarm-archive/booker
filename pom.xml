@@ -14,6 +14,7 @@
 
   <properties>
     <version.wildfly-swarm>1.0.0.Alpha6-SNAPSHOT</version.wildfly-swarm>
+    <version.openshift.client>3.0.1.Final</version.openshift.client>
 
     <maven.min.version>3.2.1</maven.min.version>
 
@@ -108,7 +109,14 @@
         <artifactId>booker-common</artifactId>
         <version>${project.version}</version>
       </dependency>
+
+      <dependency>
+        <groupId>com.openshift</groupId>
+        <artifactId>openshift-restclient-java</artifactId>
+        <version>${version.openshift.client}</version>
+      </dependency>
     </dependencies>
+
   </dependencyManagement>
 
   <dependencies>

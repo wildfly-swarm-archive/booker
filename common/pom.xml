@@ -30,6 +30,11 @@
       <groupId>org.wildfly.swarm</groupId>
       <artifactId>wildfly-swarm-jaxrs</artifactId>
     </dependency>
+
+    <dependency>
+      <groupId>com.openshift</groupId>
+      <artifactId>openshift-restclient-java</artifactId>
+    </dependency>
   </dependencies>
 
 </project>
