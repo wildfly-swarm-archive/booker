@@ -29,9 +29,12 @@
     <script language="javascript">
       if (typeof Keycloak === 'function') {
         keycloak = new Keycloak('/keycloak.json');
+        var Ribbon = ribbon({keycloak: keycloak});
+      } else {
+        alert('No keycloak is running. Cannot continue.');
       }
 
-      var Ribbon = ribbon({keycloak: keycloak});
+
     </script>
 
     <script type="text/jsx" src="/js/topology.js"></script>
