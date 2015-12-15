@@ -64,6 +64,48 @@ The default user name and password when you start keycloak for the first
 time is admin/admin. Use this to access the keycloak console, and then
 import the JSON data from this repository in `extra/keycloak`.
 
-## `Vagrant`
+# `Vagrant`
 A Vagrantfile and support scripts to install and run booker in a
 virtual machine. Requires Virtualbox and Vagrant be installed.
+
+# `OpenShift`
+
+Booker on OpenShift 3.x is still a work in progress, but here are the
+steps to try it out. These assume you have a working OpenShift 3
+environment already setup and configured.
+
+First, build the WildFly Swarm source to image container:
+
+    oc new-project swarm
+    oc create -f https://raw.githubusercontent.com/wildfly-swarm/sti-wildflyswarm/master/1.0/test/imagestream.json
+    oc create -f https://raw.githubusercontent.com/wildfly-swarm/sti-wildflyswarm/master/1.0/test/build-config.json
+    oc start-build wildflyswarm-10-centos7-build
+
+Wait for the WildFly Swarm image to finish building (use `oc status` to
+check the progress). Once it has finished, we can start deploying
+Booker using that image.
+
+    oc policy add-role-to-user -z default view
+    oc new-app --name=booker-keycloak --context-dir=extra/keycloak https://github.com/wildfly-swarm/booker
+    oc expose service booker-keycloak
+    oc new-app --env="SWARM_JAR=web-client/target/*-swarm.jar" --name=booker-web wildflyswarm-10-centos7~https://github.com/wildfly-swarm/booker
+    oc expose service booker-web
+    oc new-app --env="SWARM_JAR=library/target/*-swarm.jar" --name=booker-library wildflyswarm-10-centos7~https://github.com/wildfly-swarm/booker
+    oc new-app --env="SWARM_JAR=store/target/*-swarm.jar" --name=booker-store wildflyswarm-10-centos7~https://github.com/wildfly-swarm/booker
+    oc new-app --env="SWARM_JAR=pricing/target/*-swarm.jar" --name=booker-pricing wildflyswarm-10-centos7~https://github.com/wildfly-swarm/booker
+
+After the `booker-web` application deploys, use `oc get routes` to
+find its exposed hostname. Copy and paste that hostname into your
+browser to test out the Booker application.
+
+We can simplify all these steps by creating an OpenShift template that
+allows us to create all these resources with a single command.
+
+All the services will start and cluster with each other, but the
+actual functionality of searching and purchasing books doesn't work
+yet. Booker assumes every microservice advertises a service URL that
+the browser can access and currently we're only advertising internal
+IPs for each service. The fix for this is to translate those internal
+IPs to routable hostnames and to expose each service (via `oc
+expose`). We already do this when locating the Keycloak service, but
+it's a bit more complicated to do this for the other Booker services.
