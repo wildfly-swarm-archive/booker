@@ -2,14 +2,7 @@
   import="org.wildfly.swarm.booker.common.*"%>
 
 <%
-  String keycloakHost = Discoverer.serviceHost("booker-keycloak", "localhost");
-  int keycloakPort = Discoverer.servicePort("booker-keycloak", 9090);
-
-  String externalKeycloakHost = Discoverer.serviceHostToExternalHost(keycloakHost);
-  if (!externalKeycloakHost.equals(keycloakHost)) {
-    keycloakHost = externalKeycloakHost;
-    keycloakPort = request.getServerPort();
-  }
+  String keycloakUrl = Discoverer.externalKeycloakUrl(request.getServerPort());
 %>
 
 <html>
@@ -22,7 +15,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/react/0.13.3/react-with-addons.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/react-router/0.13.3/ReactRouter.js"></script>
     <script src="//cdn.jsdelivr.net/refluxjs/0.2.11/reflux.min.js"></script>
-    <script src="http://<%= keycloakHost %>:<%= keycloakPort %>/auth/js/keycloak.js"></script>
+    <script src="<%= keycloakUrl %>/auth/js/keycloak.js"></script>
     <script type="text/jsx" src="/js/app.js"></script>
 
     <script src="/ribbon/ribbon.js"></script>

@@ -67,6 +67,7 @@ public class Discoverer {
         if (envPort == null) {
             return -1;
         }
+
         return Integer.parseInt(envPort);
     }
 
@@ -133,6 +134,23 @@ public class Discoverer {
         }
         return serviceHost;
 
+    }
+
+    public static String externalKeycloakUrl(int externalHttpPort) throws IOException {
+        String keycloakHost = serviceHost("booker-keycloak", "localhost");
+        int keycloakPort = Discoverer.servicePort("booker-keycloak", 9090);
+
+        String externalKeycloakHost = serviceHostToExternalHost(keycloakHost);
+        if (!externalKeycloakHost.equals(keycloakHost)) {
+            keycloakHost = externalKeycloakHost;
+            keycloakPort = externalHttpPort;
+        }
+
+        String url = "http://" + keycloakHost;
+        if (keycloakPort != 80) {
+            url += ":" + keycloakPort;
+        }
+        return url;
     }
 
     protected static IClient openshiftClient() throws IOException {
