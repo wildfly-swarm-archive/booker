@@ -60,47 +60,47 @@
     <dependencies>
       <dependency>
         <groupId>org.wildfly.swarm</groupId>
-        <artifactId>wildfly-swarm-jaxrs</artifactId>
+        <artifactId>jaxrs</artifactId>
         <version>${version.wildfly-swarm}</version>
       </dependency>
       <dependency>
         <groupId>org.wildfly.swarm</groupId>
-        <artifactId>wildfly-swarm-undertow</artifactId>
+        <artifactId>undertow</artifactId>
         <version>${version.wildfly-swarm}</version>
       </dependency>
       <dependency>
         <groupId>org.wildfly.swarm</groupId>
-        <artifactId>wildfly-swarm-keycloak</artifactId>
+        <artifactId>keycloak</artifactId>
         <version>${version.wildfly-swarm}</version>
       </dependency>
       <dependency>
         <groupId>org.wildfly.swarm</groupId>
-        <artifactId>wildfly-swarm-ribbon-secured</artifactId>
+        <artifactId>ribbon-secured</artifactId>
         <version>${version.wildfly-swarm}</version>
       </dependency>
       <dependency>
         <groupId>org.wildfly.swarm</groupId>
-        <artifactId>wildfly-swarm-ribbon-webapp</artifactId>
+        <artifactId>ribbon-webapp</artifactId>
         <version>${version.wildfly-swarm}</version>
       </dependency>
       <dependency>
         <groupId>org.wildfly.swarm</groupId>
-        <artifactId>wildfly-swarm-jaxrs-weld</artifactId>
+        <artifactId>jaxrs-weld</artifactId>
         <version>${version.wildfly-swarm}</version>
       </dependency>
       <dependency>
         <groupId>org.wildfly.swarm</groupId>
-        <artifactId>wildfly-swarm-jpa</artifactId>
+        <artifactId>jpa</artifactId>
         <version>${version.wildfly-swarm}</version>
       </dependency>
       <dependency>
         <groupId>org.wildfly.swarm</groupId>
-        <artifactId>wildfly-swarm-ejb</artifactId>
+        <artifactId>ejb</artifactId>
         <version>${version.wildfly-swarm}</version>
       </dependency>
       <dependency>
         <groupId>org.wildfly.swarm</groupId>
-        <artifactId>wildfly-swarm-logstash</artifactId>
+        <artifactId>logstash</artifactId>
         <version>${version.wildfly-swarm}</version>
       </dependency>
 
@@ -122,11 +122,11 @@
   <dependencies>
     <dependency>
       <groupId>org.wildfly.swarm</groupId>
-      <artifactId>wildfly-swarm-ribbon-secured</artifactId>
+      <artifactId>ribbon-secured</artifactId>
     </dependency>
     <dependency>
       <groupId>org.wildfly.swarm</groupId>
-      <artifactId>wildfly-swarm-logstash</artifactId>
+      <artifactId>logstash</artifactId>
     </dependency>
   </dependencies>
 
