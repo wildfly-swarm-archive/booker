@@ -8,6 +8,7 @@ import com.openshift.restclient.authorization.TokenAuthorizationStrategy;
 import com.openshift.restclient.model.IProject;
 import com.openshift.restclient.model.IService;
 import com.openshift.restclient.model.route.IRoute;
+import org.wildfly.swarm.container.Environment;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -16,7 +17,7 @@ import java.util.List;
 
 public class Discoverer {
 
-    private static final boolean IN_OPENSHIFT = System.getenv("KUBERNETES_SERVICE_HOST") != null;
+    private static final boolean IN_OPENSHIFT = Environment.openshift();
 
     public static String serviceHost(String serviceName, String defaultHost) {
         String host = serviceHostFromEnv(serviceName);
