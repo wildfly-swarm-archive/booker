@@ -5,6 +5,7 @@ import com.openshift.restclient.IClient;
 import com.openshift.restclient.NoopSSLCertificateCallback;
 import com.openshift.restclient.ResourceKind;
 import com.openshift.restclient.authorization.TokenAuthorizationStrategy;
+import com.openshift.restclient.model.IPod;
 import com.openshift.restclient.model.IProject;
 import com.openshift.restclient.model.IService;
 import com.openshift.restclient.model.route.IRoute;
@@ -113,22 +114,22 @@ public class Discoverer {
         IClient client = openshiftClient();
         List<IProject> projects = client.list(ResourceKind.PROJECT);
         for (IProject project : projects) {
-            // We translate serviceHost to service to make sure we're getting
+            // We translate serviceHost to pod to make sure we're getting
             // the route from the correct project
-            List<IService> services = client.list(ResourceKind.SERVICE, project.getName());
-            IService matchingService = null;
-            for (IService service : services) {
-                if (service.getPortalIP().equals(serviceHost)) {
-                    matchingService = service;
+            List<IPod> pods = client.list(ResourceKind.POD, project.getName());
+            IPod matchingPod = null;
+            for (IPod pod : pods) {
+                if (pod.getIP().equals(serviceHost) || pod.getHost().equals(serviceHost)) {
+                    matchingPod = pod;
                     break;
                 }
             }
-            if (matchingService == null) {
+            if (matchingPod == null) {
                 continue;
             }
             List<IRoute> routes = client.list(ResourceKind.ROUTE, project.getName());
             for (IRoute route : routes) {
-                if (route.getServiceName().equals(matchingService.getName())) {
+                if (route.getServiceName().equals(matchingPod.getLabels().get("app"))) {
                     return route.getHost();
                 }
             }
