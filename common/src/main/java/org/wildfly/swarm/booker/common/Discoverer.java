@@ -117,19 +117,27 @@ public class Discoverer {
             // We translate serviceHost to pod to make sure we're getting
             // the route from the correct project
             List<IPod> pods = client.list(ResourceKind.POD, project.getName());
-            IPod matchingPod = null;
+            String matchingServiceName = null;
             for (IPod pod : pods) {
                 if (pod.getIP().equals(serviceHost) || pod.getHost().equals(serviceHost)) {
-                    matchingPod = pod;
+                    matchingServiceName = pod.getLabels().get("app");
                     break;
                 }
             }
-            if (matchingPod == null) {
+            if (matchingServiceName == null) {
+                List<IService> services = client.list(ResourceKind.SERVICE, project.getName());
+                for (IService service : services) {
+                    if (service.getPortalIP().equals(serviceHost)) {
+                        matchingServiceName = service.getName();
+                    }
+                }
+            }
+            if (matchingServiceName == null) {
                 continue;
             }
             List<IRoute> routes = client.list(ResourceKind.ROUTE, project.getName());
             for (IRoute route : routes) {
-                if (route.getServiceName().equals(matchingPod.getLabels().get("app"))) {
+                if (route.getServiceName().equals(matchingServiceName)) {
                     return route.getHost();
                 }
             }
