@@ -30,7 +30,7 @@
         <configuration>
           <mainClass>org.wildfly.swarm.booker.pricing.Main</mainClass>
           <properties>
-            <jboss.socket.binding.port-offset>3</jboss.socket.binding.port-offset>
+            <swarm.port-offset>3</swarm.port-offset>
           </properties>
         </configuration>
         <executions>

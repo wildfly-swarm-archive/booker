@@ -35,7 +35,7 @@
           <version>${version.wildfly-swarm}</version>
           <configuration>
             <properties>
-              <jboss.bind.address>127.0.0.1</jboss.bind.address>
+              <swarm.bind.address>127.0.0.1</swarm.bind.address>
               <java.net.preferIPv4Stack>true</java.net.preferIPv4Stack>
               <jboss.node.name>${project.artifactId}</jboss.node.name>
 <!--
