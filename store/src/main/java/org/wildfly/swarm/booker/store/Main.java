@@ -61,6 +61,7 @@ public class Main {
         deployment.addPackage(Main.class.getPackage());
         deployment.as(RibbonArchive.class).setApplicationName("store");
         deployment.as(Secured.class);
+        ContainerUtils.addExternalKeycloakJson(deployment);
         deployment.addAllDependencies();
 
         container.start();

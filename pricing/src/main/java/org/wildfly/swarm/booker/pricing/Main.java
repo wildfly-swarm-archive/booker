@@ -21,6 +21,7 @@ public class Main {
         deployment.addPackage(Main.class.getPackage());
         deployment.as(RibbonArchive.class).setApplicationName("pricing");
         deployment.as(Secured.class);
+        ContainerUtils.addExternalKeycloakJson(deployment);
 
         container.start();
         container.deploy(deployment);

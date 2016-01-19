@@ -45,6 +45,7 @@ public class Main {
                 .protect("/items")
                 .withMethod("GET")
                 .withRole("*");
+        ContainerUtils.addExternalKeycloakJson(deployment);
 
 
         deployment.add(new ClassLoaderAsset("META-INF/persistence.xml", Main.class.getClassLoader()), "WEB-INF/classes/META-INF/persistence.xml");
