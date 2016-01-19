@@ -91,8 +91,11 @@ Booker using that image.
     oc new-app --env="SWARM_JAR=web-client/target/*-swarm.jar" --name=booker-web wildflyswarm-10-centos7~https://github.com/wildfly-swarm/booker
     oc expose service booker-web
     oc new-app --env="SWARM_JAR=library/target/*-swarm.jar" --name=booker-library wildflyswarm-10-centos7~https://github.com/wildfly-swarm/booker
+    oc expose service booker-library
     oc new-app --env="SWARM_JAR=store/target/*-swarm.jar" --name=booker-store wildflyswarm-10-centos7~https://github.com/wildfly-swarm/booker
+    oc expose service booker-store
     oc new-app --env="SWARM_JAR=pricing/target/*-swarm.jar" --name=booker-pricing wildflyswarm-10-centos7~https://github.com/wildfly-swarm/booker
+    oc expose service booker-pricing
 
 After the `booker-web` application deploys, use `oc get routes` to
 find its exposed hostname. Copy and paste that hostname into your
