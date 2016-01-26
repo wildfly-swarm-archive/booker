@@ -3,7 +3,7 @@ Booker.Actions.SearchStore = Reflux.createActions({
 });
 
 Booker.Actions.SearchStore.search.listen( function(term) {
-  Ribbon.getJSON( "store", "/search", { q: term } )
+  topo.getJSON( "store", "/search", { q: term } )
     .then( function(data) {
       Booker.Actions.SearchStore.search.completed(data);
     }, function(e) {
@@ -105,7 +105,7 @@ Booker.StoreItem = React.createClass({
   componentWillMount: function() {
     var self = this;
 
-    Ribbon.getJSON( "store", "/book", { id: this.getParams().id } )
+    topo.getJSON( "store", "/book", { id: this.getParams().id } )
       .then( function(data) {
         self.setState( data )
       });
@@ -141,7 +141,7 @@ Booker.StoreItem.Purchase = React.createClass({
 
   purchase: function(event) {
     event.preventDefault();
-    Ribbon.postJSON( "library", "/items", { bookId: this.props.bookId } )
+    topo.postJSON( "library", "/items", { bookId: this.props.bookId } )
        .then( function(data) {
          Booker.Actions.Library.load();
        }, function(err) {

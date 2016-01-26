@@ -18,11 +18,11 @@
     <script src="<%= keycloakUrl %>/auth/js/keycloak.js"></script>
     <script type="text/jsx" src="/js/app.js"></script>
 
-    <script src="/ribbon/ribbon.js"></script>
+    <script src="/topology-webapp/topology.js"></script>
     <script language="javascript">
       if (typeof Keycloak === 'function') {
         keycloak = new Keycloak('/keycloak.json');
-        var Ribbon = ribbon({keycloak: keycloak});
+        var topo = topology({keycloak: keycloak, context: '/topology-webapp'});
       } else {
         alert('No keycloak is running. Cannot continue.');
       }

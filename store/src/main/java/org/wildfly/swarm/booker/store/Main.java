@@ -59,7 +59,7 @@ public class Main {
 
         JAXRSArchive deployment = ShrinkWrap.create(JAXRSArchive.class);
         deployment.addPackage(Main.class.getPackage());
-        deployment.as(RibbonArchive.class).setApplicationName("store");
+        deployment.as(RibbonArchive.class).advertise("store");
         deployment.as(Secured.class);
         ContainerUtils.addExternalKeycloakJson(deployment);
         deployment.addAllDependencies();

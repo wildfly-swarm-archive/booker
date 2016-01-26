@@ -40,7 +40,7 @@ public class Main {
 
         JAXRSArchive deployment = ShrinkWrap.create(JAXRSArchive.class);
         deployment.addPackage(Main.class.getPackage());
-        deployment.as(RibbonArchive.class).setApplicationName("library");
+        deployment.as(RibbonArchive.class).advertise("library");
         deployment.as(Secured.class)
                 .protect("/items")
                 .withMethod("GET")

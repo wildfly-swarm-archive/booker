@@ -3,10 +3,9 @@ package org.wildfly.swarm.booker.common;
 import org.jboss.shrinkwrap.api.Archive;
 import org.jboss.shrinkwrap.api.Node;
 import org.jboss.shrinkwrap.api.asset.ByteArrayAsset;
-import org.wildfly.swarm.config.logging.Logger;
-import org.wildfly.swarm.jgroups.JGroupsFraction;
-import org.wildfly.swarm.logging.LoggingFraction;
 import org.wildfly.swarm.config.logging.Level;
+import org.wildfly.swarm.config.logging.Logger;
+import org.wildfly.swarm.logging.LoggingFraction;
 
 import java.io.BufferedReader;
 import java.io.IOException;

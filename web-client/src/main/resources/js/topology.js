@@ -4,7 +4,7 @@ Booker.State.Topology = Reflux.createStore({
   init: function() {
     this.topology = {};
     this.listenTo( Booker.Actions.Topology, this.output );
-    Ribbon.onTopologyChange(Booker.Actions.Topology);
+    topo.onTopologyChange(Booker.Actions.Topology);
   },
 
   output: function(topology) {

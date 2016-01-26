@@ -52,7 +52,7 @@
     </dependency>
     <dependency>
       <groupId>org.wildfly.swarm</groupId>
-      <artifactId>ribbon-webapp</artifactId>
+      <artifactId>topology-webapp</artifactId>
     </dependency>
     <dependency>
       <groupId>org.wildfly.swarm.booker</groupId>

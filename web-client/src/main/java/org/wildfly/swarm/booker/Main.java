@@ -1,11 +1,12 @@
 package org.wildfly.swarm.booker;
 
 import org.jboss.shrinkwrap.api.ShrinkWrap;
+import org.wildfly.swarm.booker.common.ContainerUtils;
 import org.wildfly.swarm.container.Container;
 import org.wildfly.swarm.container.Environment;
-import org.wildfly.swarm.ribbon.webapp.RibbonWebAppFraction;
+import org.wildfly.swarm.topology.webapp.TopologyProperties;
+import org.wildfly.swarm.topology.webapp.TopologyWebAppFraction;
 import org.wildfly.swarm.undertow.WARArchive;
-import org.wildfly.swarm.booker.common.ContainerUtils;
 
 /**
  * @author Lance Ball
@@ -15,11 +16,12 @@ public class Main {
         Container container = new Container();
         container.fraction(ContainerUtils.loggingFraction());
 
-        RibbonWebAppFraction ribbonWebAppFraction = new RibbonWebAppFraction();
+        System.setProperty(TopologyProperties.CONTEXT_PATH, "/topology-webapp");
+        TopologyWebAppFraction topologyWebAppFraction = new TopologyWebAppFraction();
         if (Environment.openshift()) {
-            ribbonWebAppFraction.externalAddressMapper(OpenshiftExternalAddressMapper.class);
+            topologyWebAppFraction.externalAddressMapper(OpenshiftExternalAddressMapper.class);
         }
-        container.fraction(ribbonWebAppFraction);
+        container.fraction(topologyWebAppFraction);
         container.start();
 
         WARArchive war = ShrinkWrap.create(WARArchive.class);

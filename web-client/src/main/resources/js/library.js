@@ -3,7 +3,7 @@ Booker.Actions.Library = Reflux.createActions({
 });
 
 Booker.Actions.Library.load.listen( function(term) {
-  Ribbon.ajax( "library", "/items" )
+  topo.ajax( "library", "/items" )
     .then( function(data) {
       Booker.Actions.Library.load.completed(data);
     }, function(err) {
