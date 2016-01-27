@@ -80,6 +80,11 @@
       </dependency>
       <dependency>
         <groupId>org.wildfly.swarm</groupId>
+        <artifactId>topology-jgroups</artifactId>
+        <version>${version.wildfly-swarm}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.wildfly.swarm</groupId>
         <artifactId>topology-webapp</artifactId>
         <version>${version.wildfly-swarm}</version>
       </dependency>
@@ -127,6 +132,10 @@
     <dependency>
       <groupId>org.wildfly.swarm</groupId>
       <artifactId>logstash</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.wildfly.swarm</groupId>
+      <artifactId>topology-jgroups</artifactId>
     </dependency>
   </dependencies>
 
