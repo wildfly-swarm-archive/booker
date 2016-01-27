@@ -9,7 +9,7 @@ Booker.State.Topology = Reflux.createStore({
 
   output: function(topology) {
     console.log( "update topology", topology );
-    this.topology = JSON.parse( topology );
+    this.topology = topology;
     this.trigger(this.topology);
   },
 
