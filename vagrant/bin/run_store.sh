@@ -8,7 +8,7 @@ cd ${HOME}/booker/store
 
 if [ "$1" != "" ];
 then
-        PORT="-Djboss.socket.binding.port-offset=${1}"
+        PORT="-Dswarm.port.offset=${1}"
 fi
 
 java ${PORT} -jar target/*swarm.jar
