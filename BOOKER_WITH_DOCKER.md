@@ -69,7 +69,7 @@ cd BOOKER_HOME
 mvn clean install
 ```
 
-After this you can build start each service in it's own JVM. Services are started with a port-poffset (`-Dswarm.port.offset=...`) and require a reference to the Keycloak authentication service (`export BOOKER_KEYCLOAK_SERVICE_HOST=...`)
+After this you can build and start each service in it's own JVM. Services are started with a port-poffset (`-Dswarm.port.offset=...`) and require a reference to the Keycloak authentication service (`export BOOKER_KEYCLOAK_SERVICE_HOST=...`)
 
 ## Build and start each service
  
@@ -171,12 +171,12 @@ docker-machine ip default
 
 ### Why does web interface not work?
 
-Some browser seem to have problems with the current web interface implementation. There is a lot of trickery with same origin restrictions in this setup and some javascript wizardry going on. If you run into problem check the browser javascript log and network communication traces. If in doubt, ping us on IRC.
+Some browser seem to have problems with the current web interface implementation. There is a lot of trickery with same origin restrictions in this setup and some javascript wizardry going on. If you run into problems check the browser javascript log and network communication traces. If in doubt, ping us on IRC.
 
 ### What's the default Keycloak login?
 
-On installation time it's set to `admin:admin`. After your first successful login you are asked to change it.
+At installation time the default login set to `admin:admin`. After your first successful login you are asked to change the credentials.
 
 ### I get strange SOP errors (Same Origin Policy)
 
-Did you `export BOOKER_KEYCLOAK_SERVICE_HOST=192.168.99.100`? Or maybe try a different browser? 
+Did you `export BOOKER_KEYCLOAK_SERVICE_HOST=192.168.99.100`? Maybe try a different browser?
