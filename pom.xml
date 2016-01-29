@@ -38,12 +38,12 @@
               <swarm.bind.address>127.0.0.1</swarm.bind.address>
               <java.net.preferIPv4Stack>true</java.net.preferIPv4Stack>
               <jboss.node.name>${project.artifactId}</jboss.node.name>
-<!--
-              <swarm.logstash.hostname>localhost</swarm.logstash.hostname>
-              <swarm.logstash.port>8000</swarm.logstash.port>
--->
+              <!--
+                            <swarm.logstash.hostname>localhost</swarm.logstash.hostname>
+                            <swarm.logstash.port>8000</swarm.logstash.port>
+              -->
             </properties>
-            <jvmArguments>-Xmx128m</jvmArguments>
+            <useUberJar>true</useUberJar>
           </configuration>
           <executions>
             <execution>
@@ -56,6 +56,37 @@
       </plugins>
     </pluginManagement>
   </build>
+
+  <profiles>
+    <profile>
+      <id>consul</id>
+      <activation>
+        <property>
+          <name>swarm.consul.url</name>
+        </property>
+      </activation>
+      <dependencies>
+        <dependency>
+          <groupId>org.wildfly.swarm</groupId>
+          <artifactId>topology-consul</artifactId>
+        </dependency>
+      </dependencies>
+    </profile>
+    <profile>
+      <id>jgroups</id>
+      <activation>
+        <property>
+          <name>!swarm.consul.url</name>
+        </property>
+      </activation>
+      <dependencies>
+        <dependency>
+          <groupId>org.wildfly.swarm</groupId>
+          <artifactId>topology-jgroups</artifactId>
+        </dependency>
+      </dependencies>
+    </profile>
+  </profiles>
 
   <dependencyManagement>
     <dependencies>
@@ -81,12 +112,17 @@
       </dependency>
       <dependency>
         <groupId>org.wildfly.swarm</groupId>
+        <artifactId>topology-webapp</artifactId>
+        <version>${version.wildfly-swarm}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.wildfly.swarm</groupId>
         <artifactId>topology-jgroups</artifactId>
         <version>${version.wildfly-swarm}</version>
       </dependency>
       <dependency>
         <groupId>org.wildfly.swarm</groupId>
-        <artifactId>topology-webapp</artifactId>
+        <artifactId>topology-consul</artifactId>
         <version>${version.wildfly-swarm}</version>
       </dependency>
       <dependency>
@@ -133,10 +169,6 @@
     <dependency>
       <groupId>org.wildfly.swarm</groupId>
       <artifactId>logstash</artifactId>
-    </dependency>
-    <dependency>
-      <groupId>org.wildfly.swarm</groupId>
-      <artifactId>topology-jgroups</artifactId>
     </dependency>
   </dependencies>
 

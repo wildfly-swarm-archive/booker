@@ -29,6 +29,9 @@ public class Store {
     public Store() throws XMLStreamException {
         XMLInputFactory f = XMLInputFactory.newFactory();
         InputStream storeStream = Store.class.getClassLoader().getResourceAsStream("META-INF/store.xml");
+        if(null==storeStream)
+            throw new RuntimeException("Failed to load store.xml");
+
         XMLStreamReader r = f.createXMLStreamReader(storeStream);
 
         while (r.hasNext()) {
