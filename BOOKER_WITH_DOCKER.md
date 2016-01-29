@@ -16,9 +16,11 @@ In the following we assume docker is running on `192.168.99.100`. See the 'FAQ' 
 
 ## Consul (http://consul.io)
 
-With Swarm you have two choices for providing service registration and discovery: jgroups or consul. In this setup we use consul, because much more straightforward to configure and use, because the main interaction with the registry happens through HTTP.
+With Swarm you have two choices for providing service registration and discovery: jgroups or consul.
+In this setup we use consul, because it's much more straightforward to configure and use:
+The main interaction with the registry happens through HTTP.
 
-We leverage the progrium consul image to launch consul. Simply pull the image:
+The progrium consul lends itself well to launch consul. Simply pull the image:
 
 ```
 docker pull progrium/consul
@@ -103,7 +105,8 @@ mvn clean wildfly-swarm:run -Dswarm.consul.url=http://192.168.99.100:8500/ -Dswa
 
 ## Verify all services have been registered
 
-If you move back to consul web ui (`http://192.168.99.100:8500`) you should see that the three backend services (library, pricing and store) are registered with consul, pointing to their corresponding IP addresses and being in a 'healthy' state.
+If you move back to consul web ui (`http://192.168.99.100:8500`) you should see
+three backend services registered with consul, exposing to their IP addresses and being in a 'healthy' state.
 
 You can also query the registry from the command line:
 (See also https://www.consul.io/docs/agent/http.html)
@@ -147,7 +150,8 @@ curl 192.168.99.100:8500/v1/health/node/node1 | pretty.json
 
 ## Launch the demo store
 
-Once the above steps have been performed successfully, you are ready to launch the actual web interface, that leverages the three backend services, the service registry and the authentication service.
+Once the above steps have been performed successfully, you are ready to launch the actual web interface.
+It leverages the three backend services (library, pricing and store), the service registry and the authentication service.
 
 ```
 http://localhost:8280
