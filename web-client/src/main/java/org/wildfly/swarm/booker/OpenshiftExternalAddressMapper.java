@@ -5,6 +5,8 @@ import org.wildfly.swarm.topology.ExternalAddressMapper;
 import org.wildfly.swarm.topology.Topology;
 
 import java.io.IOException;
+import java.util.Collections;
+import java.util.List;
 
 public class OpenshiftExternalAddressMapper implements ExternalAddressMapper {
     @Override
@@ -20,6 +22,11 @@ public class OpenshiftExternalAddressMapper implements ExternalAddressMapper {
                 @Override
                 public int getPort() {
                     return defaultPort;
+                }
+
+                @Override
+                public List<String> getTags() {
+                    return Collections.emptyList();
                 }
             };
         } catch (IOException ex) {
