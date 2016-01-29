@@ -20,7 +20,7 @@ With Swarm you have two choices for providing service registration and discovery
 In this setup we use consul, because it's much more straightforward to configure and use:
 The main interaction with the registry happens through HTTP.
 
-The progrium consul lends itself well to launch consul. Simply pull the image:
+The progrium consul image lends itself well to launch consul. Simply pull the image:
 
 ```
 docker pull progrium/consul
@@ -62,14 +62,14 @@ http://192.168.99.100:9090/auth
 
 # Prepare the Wildfly Swarm services
 
-Make you've successful build the top level project before you move on:
+Make sure you've successful build the top level project before you proceed:
 
 ```
 cd BOOKER_HOME
 mvn clean install
 ```
 
-After this you can head on and start each service in it's own JVM. Services run with a port-poffset (`-Dswarm.port.offset=...`) and require a reference to the Keycloak authentication service (`export BOOKER_KEYCLOAK_SERVICE_HOST=...`)
+After this you can build start each service in it's own JVM. Services are started with a port-poffset (`-Dswarm.port.offset=...`) and require a reference to the Keycloak authentication service (`export BOOKER_KEYCLOAK_SERVICE_HOST=...`)
 
 ## Build and start each service
  
@@ -105,7 +105,7 @@ mvn clean wildfly-swarm:run -Dswarm.consul.url=http://192.168.99.100:8500/ -Dswa
 
 ## Verify all services have been registered
 
-If you move back to consul web ui (`http://192.168.99.100:8500`) you should see
+If you head back to the consul web ui (`http://192.168.99.100:8500`) you should see
 three backend services registered with consul, exposing to their IP addresses and being in a 'healthy' state.
 
 You can also query the registry from the command line:
