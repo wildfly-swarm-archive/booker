@@ -58,7 +58,7 @@ public class Main {
         container.fraction(ContainerUtils.loggingFraction());
 
         JAXRSArchive deployment = ShrinkWrap.create(JAXRSArchive.class);
-        deployment.addPackage(Main.class.getPackage());
+        deployment.addAsLibrary(container.createDefaultDeployment());
         deployment.as(RibbonArchive.class).advertise("store");
         deployment.as(Secured.class);
         ContainerUtils.addExternalKeycloakJson(deployment);
