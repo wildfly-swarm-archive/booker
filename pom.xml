@@ -43,6 +43,7 @@
                             <swarm.logstash.port>8000</swarm.logstash.port>
               -->
             </properties>
+            <jvmArguments>-Xmx128m</jvmArguments>
             <useUberJar>true</useUberJar>
           </configuration>
           <executions>
