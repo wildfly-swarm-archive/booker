@@ -13,7 +13,7 @@
   <packaging>pom</packaging>
 
   <properties>
-    <version.wildfly-swarm>1.0.0.Alpha7-SNAPSHOT</version.wildfly-swarm>
+    <version.wildfly-swarm>1.0.0.Alpha9-SNAPSHOT</version.wildfly-swarm>
     <version.openshift.client>3.0.1.Final</version.openshift.client>
 
     <maven.min.version>3.2.1</maven.min.version>
@@ -43,7 +43,9 @@
                             <swarm.logstash.port>8000</swarm.logstash.port>
               -->
             </properties>
-            <jvmArguments>-Xmx128m</jvmArguments>
+            <jvmArguments>
+              <jvmArgument>-Xmx128m</jvmArgument>
+            </jvmArguments>
             <useUberJar>true</useUberJar>
           </configuration>
           <executions>
@@ -144,6 +146,12 @@
       <dependency>
         <groupId>org.wildfly.swarm</groupId>
         <artifactId>logstash</artifactId>
+        <version>${version.wildfly-swarm}</version>
+      </dependency>
+
+      <dependency>
+        <groupId>org.wildfly.swarm.servers</groupId>
+        <artifactId>keycloak</artifactId>
         <version>${version.wildfly-swarm}</version>
       </dependency>
 

@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  ~ Copyright 2015 Red Hat, Inc. and/or its affiliates.
+  ~
+  ~ Licensed under the Apache License version 2.0, available at http://www.apache.org/licenses/LICENSE-2.0
+  -->
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://maven.apache.org/POM/4.0.0"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <parent>
+    <groupId>org.wildfly.swarm.booker</groupId>
+    <artifactId>booker-parent</artifactId>
+    <version>1.0.0.Alpha01-SNAPSHOT</version>
+    <relativePath>../</relativePath>
+  </parent>
+
+  <artifactId>booker-keycloak</artifactId>
+
+  <name>Booker: Keycloak</name>
+  <description>Booker: Keycloak</description>
+
+  <packaging>jar</packaging>
+
+  <properties>
+    <version.foundation>5.5.2</version.foundation>
+  </properties>
+
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>org.wildfly.swarm</groupId>
+        <artifactId>wildfly-swarm-plugin</artifactId>
+        <configuration>
+          <mainClass>org.wildfly.swarm.ContainerOnlySwarm</mainClass>
+          <properties>
+            <swarm.http.port>9090</swarm.http.port>
+            <wildfly.swarm.keycloak.server.db>${basedir}/target/keycloak</wildfly.swarm.keycloak.server.db>
+            <keycloak.migration.provider>singleFile</keycloak.migration.provider>
+            <keycloak.migration.file>${basedir}/../extra/keycloak/booker.json</keycloak.migration.file>
+            <keycloak.migration.strategy>OVERWRITE_EXISTING</keycloak.migration.strategy>
+            <keycloak.migration.action>import</keycloak.migration.action>
+<!--
+            <keycloak.migration.action>export</keycloak.migration.action>
+-->
+          </properties>
+        </configuration>
+        <executions>
+          <execution>
+            <goals>
+              <goal>package</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+    </plugins>
+  </build>
+
+  <dependencies>
+    <dependency>
+      <groupId>org.wildfly.swarm.servers</groupId>
+      <artifactId>keycloak</artifactId>
+    </dependency>
+  </dependencies>
+
+</project>

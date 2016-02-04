@@ -10,3 +10,4 @@ tmp
 .classpath
 .project
 .settings/
+keycloak*.db
