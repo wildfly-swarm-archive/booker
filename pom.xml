@@ -78,14 +78,21 @@
     <profile>
       <id>jgroups</id>
       <activation>
-        <property>
-          <name>!swarm.consul.url</name>
-        </property>
+        <activeByDefault>true</activeByDefault>
       </activation>
       <dependencies>
         <dependency>
           <groupId>org.wildfly.swarm</groupId>
           <artifactId>topology-jgroups</artifactId>
+        </dependency>
+      </dependencies>
+    </profile>
+    <profile>
+      <id>openshift</id>
+      <dependencies>
+        <dependency>
+          <groupId>org.wildfly.swarm</groupId>
+          <artifactId>topology-openshift</artifactId>
         </dependency>
       </dependencies>
     </profile>
@@ -126,6 +133,11 @@
       <dependency>
         <groupId>org.wildfly.swarm</groupId>
         <artifactId>topology-consul</artifactId>
+        <version>${version.wildfly-swarm}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.wildfly.swarm</groupId>
+        <artifactId>topology-openshift</artifactId>
         <version>${version.wildfly-swarm}</version>
       </dependency>
       <dependency>
