@@ -6,6 +6,7 @@ import org.jboss.shrinkwrap.api.asset.ByteArrayAsset;
 import org.wildfly.swarm.config.logging.Level;
 import org.wildfly.swarm.config.logging.Logger;
 import org.wildfly.swarm.logging.LoggingFraction;
+import org.wildfly.swarm.logging.LoggingProperties;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -15,7 +16,20 @@ import java.io.InputStreamReader;
 public class ContainerUtils {
 
     public static LoggingFraction loggingFraction() {
-        LoggingFraction fraction = LoggingFraction.createDefaultLoggingFraction();
+        String prop = System.getProperty(LoggingProperties.LOGGING);
+        LoggingFraction fraction = null;
+        if (prop != null) {
+            prop = prop.trim().toLowerCase();
+
+            if (prop.equals("debug")) {
+                fraction = LoggingFraction.createDebugLoggingFraction();
+            } else if (prop.equals("trace")) {
+                fraction = LoggingFraction.createTraceLoggingFraction();
+            }
+        }
+        if (fraction == null) {
+            fraction = LoggingFraction.createDefaultLoggingFraction();
+        }
 
         fraction.logger(new Logger("org.openshift.ping")
                 .level(Level.TRACE));
