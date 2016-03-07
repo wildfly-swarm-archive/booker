@@ -13,7 +13,7 @@
   <packaging>pom</packaging>
 
   <properties>
-    <version.wildfly-swarm>1.0.0.Alpha9-SNAPSHOT</version.wildfly-swarm>
+    <version.wildfly-swarm>1.0.0.CR1-SNAPSHOT</version.wildfly-swarm>
     <version.openshift.client>3.0.1.Final</version.openshift.client>
 
     <maven.min.version>3.2.1</maven.min.version>
@@ -102,63 +102,10 @@
     <dependencies>
       <dependency>
         <groupId>org.wildfly.swarm</groupId>
-        <artifactId>jaxrs</artifactId>
+        <artifactId>bom</artifactId>
         <version>${version.wildfly-swarm}</version>
-      </dependency>
-      <dependency>
-        <groupId>org.wildfly.swarm</groupId>
-        <artifactId>undertow</artifactId>
-        <version>${version.wildfly-swarm}</version>
-      </dependency>
-      <dependency>
-        <groupId>org.wildfly.swarm</groupId>
-        <artifactId>keycloak</artifactId>
-        <version>${version.wildfly-swarm}</version>
-      </dependency>
-      <dependency>
-        <groupId>org.wildfly.swarm</groupId>
-        <artifactId>ribbon-secured</artifactId>
-        <version>${version.wildfly-swarm}</version>
-      </dependency>
-      <dependency>
-        <groupId>org.wildfly.swarm</groupId>
-        <artifactId>topology-webapp</artifactId>
-        <version>${version.wildfly-swarm}</version>
-      </dependency>
-      <dependency>
-        <groupId>org.wildfly.swarm</groupId>
-        <artifactId>topology-jgroups</artifactId>
-        <version>${version.wildfly-swarm}</version>
-      </dependency>
-      <dependency>
-        <groupId>org.wildfly.swarm</groupId>
-        <artifactId>topology-consul</artifactId>
-        <version>${version.wildfly-swarm}</version>
-      </dependency>
-      <dependency>
-        <groupId>org.wildfly.swarm</groupId>
-        <artifactId>topology-openshift</artifactId>
-        <version>${version.wildfly-swarm}</version>
-      </dependency>
-      <dependency>
-        <groupId>org.wildfly.swarm</groupId>
-        <artifactId>jaxrs-weld</artifactId>
-        <version>${version.wildfly-swarm}</version>
-      </dependency>
-      <dependency>
-        <groupId>org.wildfly.swarm</groupId>
-        <artifactId>jpa</artifactId>
-        <version>${version.wildfly-swarm}</version>
-      </dependency>
-      <dependency>
-        <groupId>org.wildfly.swarm</groupId>
-        <artifactId>ejb</artifactId>
-        <version>${version.wildfly-swarm}</version>
-      </dependency>
-      <dependency>
-        <groupId>org.wildfly.swarm</groupId>
-        <artifactId>logstash</artifactId>
-        <version>${version.wildfly-swarm}</version>
+        <type>pom</type>
+        <scope>import</scope>
       </dependency>
 
       <dependency>
