@@ -88,14 +88,11 @@ Booker using that image.
     oc policy add-role-to-user -z default view
     oc new-app --name=booker-keycloak --context-dir=extra/keycloak https://github.com/wildfly-swarm/booker
     oc expose service booker-keycloak
-    oc new-app --env="SWARM_JAR=web-client/target/*-swarm.jar" --name=booker-web wildflyswarm-10-centos7~https://github.com/wildfly-swarm/booker
-    oc expose service booker-web
-    oc new-app --env="SWARM_JAR=library/target/*-swarm.jar" --name=booker-library wildflyswarm-10-centos7~https://github.com/wildfly-swarm/booker
-    oc expose service booker-library
-    oc new-app --env="SWARM_JAR=store/target/*-swarm.jar" --name=booker-store wildflyswarm-10-centos7~https://github.com/wildfly-swarm/booker
-    oc expose service booker-store
-    oc new-app --env="SWARM_JAR=pricing/target/*-swarm.jar" --name=booker-pricing wildflyswarm-10-centos7~https://github.com/wildfly-swarm/booker
-    oc expose service booker-pricing
+    oc new-app --env="SWARM_JAR=web-client/target/*-swarm.jar" --name=web wildflyswarm-10-centos7~https://github.com/wildfly-swarm/booker
+    oc expose service web
+    oc new-app --env="SWARM_JAR=library/target/*-swarm.jar" --name=library wildflyswarm-10-centos7~https://github.com/wildfly-swarm/booker
+    oc new-app --env="SWARM_JAR=store/target/*-swarm.jar" --name=store wildflyswarm-10-centos7~https://github.com/wildfly-swarm/booker
+    oc new-app --env="SWARM_JAR=pricing/target/*-swarm.jar" --name=pricing wildflyswarm-10-centos7~https://github.com/wildfly-swarm/booker
 
 After the `booker-web` application deploys, use `oc get routes` to
 find its exposed hostname. Copy and paste that hostname into your
@@ -103,12 +100,3 @@ browser to test out the Booker application.
 
 We can simplify all these steps by creating an OpenShift template that
 allows us to create all these resources with a single command.
-
-All the services will start and cluster with each other, but the
-actual functionality of searching and purchasing books doesn't work
-yet. Booker assumes every microservice advertises a service URL that
-the browser can access and currently we're only advertising internal
-IPs for each service. The fix for this is to translate those internal
-IPs to routable hostnames and to expose each service (via `oc
-expose`). We already do this when locating the Keycloak service, but
-it's a bit more complicated to do this for the other Booker services.
