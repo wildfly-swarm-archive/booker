@@ -9,7 +9,7 @@ import com.openshift.restclient.model.IPod;
 import com.openshift.restclient.model.IProject;
 import com.openshift.restclient.model.IService;
 import com.openshift.restclient.model.route.IRoute;
-import org.wildfly.swarm.container.Environment;
+import org.wildfly.swarm.spi.api.Environment;
 
 import java.io.IOException;
 import java.nio.file.Files;
