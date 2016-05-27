@@ -62,7 +62,8 @@ Once you have keycloak, start it using the `standalone.sh` command.
 
 The default user name and password when you start keycloak for the first
 time is admin/admin. Use this to access the keycloak console, and then
-import the JSON data from this repository in `extra/keycloak`.
+select `Add realm`, set the name to `booker` and import the JSON data
+from this repository in `extra/keycloak`.
 
 # `Vagrant`
 A Vagrantfile and support scripts to install and run booker in a
