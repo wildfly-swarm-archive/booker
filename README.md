@@ -101,3 +101,16 @@ browser to test out the Booker application.
 
 We can simplify all these steps by creating an OpenShift template that
 allows us to create all these resources with a single command.
+
+
+# `Docker`
+
+Booker uses https://github.com/spotify/docker-maven-plugin to enable docker build for the 4 services. Run with
+
+    mvn clean install docker:build
+
+to build the docker images, and then run with
+
+    docker run -t -p $hostport:$containerport $dockerimage
+
+to start the corresponding services. (Don't forget start a single keycloak server before that)
