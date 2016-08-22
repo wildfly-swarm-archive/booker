@@ -69,9 +69,33 @@
       <artifactId>jaxrs-cdi</artifactId>
     </dependency>
     <dependency>
+      <groupId>org.wildfly.swarm</groupId>
+      <artifactId>zipkin-jaxrs</artifactId>
+    </dependency>
+    <dependency>
       <groupId>org.wildfly.swarm.booker</groupId>
       <artifactId>booker-common</artifactId>
     </dependency>
+
+    <dependency>
+      <groupId>org.wildfly.swarm</groupId>
+      <artifactId>arquillian</artifactId>
+      <version>${version.wildfly-swarm}</version>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.jboss.arquillian.junit</groupId>
+      <artifactId>arquillian-junit-container</artifactId>
+      <version>${version.org.arquillian}</version>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.jboss.resteasy</groupId>
+      <artifactId>resteasy-client</artifactId>
+      <version>${version.resteasy}</version>
+      <scope>test</scope>
+    </dependency>
+
   </dependencies>
 
 </project>
