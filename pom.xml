@@ -13,7 +13,7 @@
   <packaging>pom</packaging>
 
   <properties>
-    <version.wildfly-swarm>1.0.0.CR2</version.wildfly-swarm>
+    <version.wildfly-swarm>2016.10-SNAPSHOT</version.wildfly-swarm>
     <version.openshift.client>3.0.1.Final</version.openshift.client>
 
     <maven.min.version>3.2.1</maven.min.version>
@@ -110,7 +110,7 @@
     <dependencies>
       <dependency>
         <groupId>org.wildfly.swarm</groupId>
-        <artifactId>bom</artifactId>
+        <artifactId>bom-all</artifactId>
         <version>${version.wildfly-swarm}</version>
         <type>pom</type>
         <scope>import</scope>

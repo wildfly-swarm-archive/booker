@@ -12,6 +12,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 import javax.xml.stream.XMLStreamException;
 
 import org.jboss.shrinkwrap.api.ShrinkWrap;
+import org.wildfly.swarm.Swarm;
 import org.wildfly.swarm.container.Container;
 import org.wildfly.swarm.jaxrs.JAXRSArchive;
 import org.wildfly.swarm.keycloak.Secured;
@@ -54,8 +55,9 @@ public class Main {
 
 
 
-        Container container = new Container();
+        Swarm container = new Swarm();
         container.fraction(ContainerUtils.loggingFraction());
+        container.start();
 
         JAXRSArchive deployment = ShrinkWrap.create(JAXRSArchive.class);
         deployment.addAsLibrary(container.createDefaultDeployment());
@@ -64,7 +66,7 @@ public class Main {
         ContainerUtils.addExternalKeycloakJson(deployment);
         deployment.addAllDependencies();
 
-        container.start();
+
         container.deploy(deployment);
 
     }

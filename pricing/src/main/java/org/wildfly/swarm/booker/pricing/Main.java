@@ -1,6 +1,7 @@
 package org.wildfly.swarm.booker.pricing;
 
 import org.jboss.shrinkwrap.api.ShrinkWrap;
+import org.wildfly.swarm.Swarm;
 import org.wildfly.swarm.container.Container;
 import org.wildfly.swarm.jaxrs.JAXRSArchive;
 import org.wildfly.swarm.keycloak.Secured;
@@ -14,7 +15,7 @@ public class Main {
 
     public static void main(String... args) throws Exception {
 
-        Container container = new Container();
+        Swarm container = new Swarm();
         container.fraction(ContainerUtils.loggingFraction());
 
         JAXRSArchive deployment = ShrinkWrap.create(JAXRSArchive.class);
