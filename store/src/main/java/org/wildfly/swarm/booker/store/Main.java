@@ -12,12 +12,13 @@ import java.util.concurrent.atomic.AtomicInteger;
 import javax.xml.stream.XMLStreamException;
 
 import org.jboss.shrinkwrap.api.ShrinkWrap;
+import org.jboss.shrinkwrap.api.asset.ClassLoaderAsset;
 import org.wildfly.swarm.Swarm;
-import org.wildfly.swarm.container.Container;
+import org.wildfly.swarm.booker.common.ContainerUtils;
 import org.wildfly.swarm.jaxrs.JAXRSArchive;
+import org.wildfly.swarm.jaxrs.btm.ZipkinFraction;
 import org.wildfly.swarm.keycloak.Secured;
 import org.wildfly.swarm.netflix.ribbon.RibbonArchive;
-import org.wildfly.swarm.booker.common.ContainerUtils;
 
 /**
  * @author Bob McWhirter
@@ -54,13 +55,24 @@ public class Main {
         }
 
 
-
         Swarm container = new Swarm();
         container.fraction(ContainerUtils.loggingFraction());
+        /*
+        enable this for remote zipkin reporting
+
+        container.fraction(
+                new ZipkinFraction()
+                        .reportAsync("http://localhost:9411/api/v1/spans")
+                        .sampleRate(0.1f) // keep 10%
+        );*/
+
+        container.fraction(new ZipkinFraction());
         container.start();
 
         JAXRSArchive deployment = ShrinkWrap.create(JAXRSArchive.class);
-        deployment.addAsLibrary(container.createDefaultDeployment());
+        deployment.addPackage(Main.class.getPackage());
+        deployment.addAsWebInfResource(new ClassLoaderAsset("WEB-INF/web.xml", Main.class.getClassLoader()), "web.xml");
+        deployment.add(new ClassLoaderAsset("META-INF/store.xml", Main.class.getClassLoader()), "WEB-INF/classes/store.xml");
         deployment.as(RibbonArchive.class).advertise("store");
         deployment.as(Secured.class);
         ContainerUtils.addExternalKeycloakJson(deployment);
