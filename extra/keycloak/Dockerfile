@@ -1,7 +1,7 @@
 # This image provides a customized version of Keycloak with the booker
 # realm configured out of the box.
 
-FROM jboss/keycloak:1.7.0.Final
+FROM jboss/keycloak:2.1.0.Final
 
 MAINTAINER Ben Browning <bbrownin@redhat.com>
 

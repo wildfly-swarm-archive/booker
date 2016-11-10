@@ -1,6 +1,6 @@
 # Download Keycloak
 
-    http://downloads.jboss.org/keycloak/1.4.0.Final/keycloak-1.4.0.Final.zip
+    http://downloads.jboss.org/keycloak/2.1.0.Final/keycloak-2.1.0.Final.zip
 
 # Launch
 
