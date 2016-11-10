@@ -78,9 +78,7 @@ environment already setup and configured.
 First, build the WildFly Swarm source to image container:
 
     oc new-project swarm
-    oc create -f https://raw.githubusercontent.com/wildfly-swarm/sti-wildflyswarm/master/1.0/test/imagestream.json
-    oc create -f https://raw.githubusercontent.com/wildfly-swarm/sti-wildflyswarm/master/1.0/test/build-config.json
-    oc start-build wildflyswarm-10-centos7-build
+    oc create -f https://raw.githubusercontent.com/wildfly-swarm/sti-wildflyswarm/master/1.0/wildflyswarm-sti-all.json
 
 Wait for the WildFly Swarm image to finish building (use `oc status` to
 check the progress). Once it has finished, we can start deploying

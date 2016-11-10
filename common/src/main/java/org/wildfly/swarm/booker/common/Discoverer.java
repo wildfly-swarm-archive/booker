@@ -1,20 +1,18 @@
 package org.wildfly.swarm.booker.common;
 
-import com.openshift.restclient.ClientFactory;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.util.List;
+
+import com.openshift.restclient.ClientBuilder;
 import com.openshift.restclient.IClient;
-import com.openshift.restclient.NoopSSLCertificateCallback;
 import com.openshift.restclient.ResourceKind;
-import com.openshift.restclient.authorization.TokenAuthorizationStrategy;
 import com.openshift.restclient.model.IPod;
 import com.openshift.restclient.model.IProject;
 import com.openshift.restclient.model.IService;
 import com.openshift.restclient.model.route.IRoute;
 import org.wildfly.swarm.spi.api.Environment;
-
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Paths;
-import java.util.List;
 
 public class Discoverer {
 
@@ -170,8 +168,8 @@ public class Discoverer {
         String tokenFile = "/var/run/secrets/kubernetes.io/serviceaccount/token";
         String token = new String(Files.readAllBytes(Paths.get(tokenFile)));
 
-        IClient client = new ClientFactory().create("https://" + kubeHost + ":" + kubePort, new NoopSSLCertificateCallback());
-        client.setAuthorizationStrategy(new TokenAuthorizationStrategy(token));
+        IClient client = new ClientBuilder("https://" + kubeHost + ":" + kubePort).build();
+        client.getAuthorizationContext().setToken(token);
         return client;
     }
 }
