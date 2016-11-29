@@ -10,4 +10,6 @@ RUN chown jboss:jboss /opt/booker
 USER jboss
 ADD booker-library-swarm.jar /opt/booker/booker-library.jar
 
+EXPOSE 8080
+
 ENTRYPOINT /usr/bin/launch.sh

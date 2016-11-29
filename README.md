@@ -77,7 +77,7 @@ environment already setup and configured.
 
 First, build the WildFly Swarm source to image container:
 
-    oc new-project swarm
+    oc new-project booker
     oc create -f https://raw.githubusercontent.com/wildfly-swarm/sti-wildflyswarm/master/1.0/wildflyswarm-sti-all.json
 
 Wait for the WildFly Swarm image to finish building (use `oc status` to
