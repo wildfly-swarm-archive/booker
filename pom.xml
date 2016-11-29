@@ -26,6 +26,10 @@
     <version.org.arquillian>1.1.10.Final</version.org.arquillian>
     <version.junit>4.12</version.junit>
     <version.resteasy>3.0.19.Final</version.resteasy>
+
+    <library.port.offset>0</library.port.offset>
+    <pricing.port.offset>0</pricing.port.offset>
+    <store.port.offset>0</store.port.offset>
   </properties>
 
   <build>
@@ -92,6 +96,11 @@
       <activation>
         <activeByDefault>true</activeByDefault>
       </activation>
+      <properties>
+        <library.port.offset>4</library.port.offset>
+        <pricing.port.offset>3</pricing.port.offset>
+        <store.port.offset>2</store.port.offset>
+      </properties>
       <dependencies>
         <dependency>
           <groupId>org.wildfly.swarm</groupId>
