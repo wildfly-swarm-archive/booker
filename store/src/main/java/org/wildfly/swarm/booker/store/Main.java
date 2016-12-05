@@ -61,12 +61,12 @@ public class Main {
         enable this for remote zipkin reporting
 
         container.fraction(
-                new ZipkinFraction()
+                new ZipkinFraction("booker-store")
                         .reportAsync("http://localhost:9411/api/v1/spans")
                         .sampleRate(0.1f) // keep 10%
         );*/
 
-        container.fraction(new ZipkinFraction());
+        container.fraction(new ZipkinFraction("booker-store"));
         container.start();
 
         JAXRSArchive deployment = ShrinkWrap.create(JAXRSArchive.class);
